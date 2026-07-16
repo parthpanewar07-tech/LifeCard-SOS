@@ -43,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: IndexedStack(
           index: _currentTab,

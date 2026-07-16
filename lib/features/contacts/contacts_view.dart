@@ -47,7 +47,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
     final helplinesAsync = ref.watch(helplinesProvider);
 
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
@@ -121,7 +121,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
             Container(
               height: 48,
               decoration: BoxDecoration(
-                color: context.colorScheme.onSurface.withOpacity(0.08),
+                color: context.colorScheme.onSurface.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
@@ -202,12 +202,11 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                             Expanded(
                               child: ReorderableListView.builder(
                                 itemCount: filtered.length,
-                                onReorder: (oldIdx, newIdx) {
-                                  if (newIdx > oldIdx) newIdx--;
-                                  final item = filtered.removeAt(oldIdx);
-                                  filtered.insert(newIdx, item);
-                                  ref.read(contactsProvider.notifier).reorderContacts(filtered);
-                                },
+                                  onReorderItem: (oldIdx, newIdx) {
+                                    final item = filtered.removeAt(oldIdx);
+                                    filtered.insert(newIdx, item);
+                                    ref.read(contactsProvider.notifier).reorderContacts(filtered);
+                                  },
                                 itemBuilder: (context, idx) {
                                   final contact = filtered[idx];
                                   return _buildContactTile(contact, idx);
@@ -218,7 +217,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                         );
                       },
                       loading: () => const Center(child: CircularProgressIndicator()),
-                      error: (_, __) => const Center(child: Text('Error loading contacts')),
+                      error: (err, stack) => const Center(child: Text('Error loading contacts')),
                     )
                   : helplinesAsync.when(
                       data: (helplines) {
@@ -232,7 +231,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
 
                         return ListView.separated(
                           itemCount: filtered.length,
-                          separatorBuilder: (_, __) => const Divider(height: 1),
+                           separatorBuilder: (context, index) => const Divider(height: 1),
                           itemBuilder: (context, idx) {
                             final helpline = filtered[idx];
                             return _buildHelplineTile(helpline);
@@ -240,7 +239,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                         );
                       },
                       loading: () => const Center(child: CircularProgressIndicator()),
-                      error: (_, __) => const Center(child: Text('Error loading helplines')),
+                      error: (err, stack) => const Center(child: Text('Error loading helplines')),
                     ),
             ),
           ],
@@ -267,7 +266,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
             // Priority Index badge
             CircleAvatar(
               radius: 12,
-              backgroundColor: AppColors.primaryRed.withOpacity(0.1),
+              backgroundColor: AppColors.primaryRed.withValues(alpha: 0.1),
               child: Text(
                 '${idx + 1}',
                 style: const TextStyle(color: AppColors.primaryRed, fontSize: 12, fontWeight: FontWeight.bold),
@@ -325,7 +324,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
       contentPadding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
       title: Text(
         helpline.name,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: context.colorScheme.onBackground),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: context.colorScheme.onSurface),
       ),
       subtitle: Text(
         '${helpline.category} • ${helpline.number}',

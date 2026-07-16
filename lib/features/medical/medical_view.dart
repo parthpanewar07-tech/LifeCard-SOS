@@ -20,7 +20,7 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
     final profileAsync = ref.watch(profileProvider);
     final medicalAsync = ref.watch(medicalProfileProvider);
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 12.0),
@@ -41,7 +41,7 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                 child: CircularProgressIndicator(strokeWidth: 2),
               ),
             ),
-            error: (_, __) => const CircleAvatar(
+            error: (err, stack) => const CircleAvatar(
               child: Icon(Icons.person, color: Colors.grey),
             ),
           ),
@@ -118,13 +118,13 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: context.colorScheme.onBackground,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
                 ],
               ),
               loading: () => const CircularProgressIndicator(),
-              error: (_, __) => const Text('Guest'),
+              error: (err, stack) => const Text('Guest'),
             ),
             const SizedBox(height: 24),
 
@@ -140,14 +140,14 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                       value: profile.bloodGroup.isEmpty
                           ? 'Unknown'
                           : profile.bloodGroup,
-                      isRedValue: !profile.bloodGroup.isEmpty,
+                      isRedValue: profile.bloodGroup.isNotEmpty,
                       icon: Icons.bloodtype,
                       iconColor: profile.bloodGroup.isEmpty
                           ? Colors.grey
                           : AppColors.primaryRed,
                     ),
                     loading: () => const SizedBox(height: 120),
-                    error: (_, __) => const SizedBox(height: 120),
+                    error: (err, stack) => const SizedBox(height: 120),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -165,7 +165,7 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                       isItalic: med.emergencyNotes.isEmpty,
                     ),
                     loading: () => const SizedBox(height: 120),
-                    error: (_, __) => const SizedBox(height: 120),
+                    error: (err, stack) => const SizedBox(height: 120),
                   ),
                 ),
               ],
@@ -221,7 +221,7 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                 ],
               ).animate().fadeIn(delay: 200.ms, duration: 400.ms).slideY(begin: 0.05, end: 0),
               loading: () => const CircularProgressIndicator(),
-              error: (_, __) => const Text('Error loading medical profile'),
+              error: (err, stack) => const Text('Error loading medical profile'),
             ),
           ],
         ),
@@ -301,7 +301,7 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(icon, color: color, size: 18),
@@ -336,7 +336,7 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                         item,
                         style: TextStyle(
                           fontSize: 13,
-                          color: context.colorScheme.onSurface.withOpacity(0.8),
+                          color: context.colorScheme.onSurface.withValues(alpha: 0.8),
                           height: 1.3,
                         ),
                       ),

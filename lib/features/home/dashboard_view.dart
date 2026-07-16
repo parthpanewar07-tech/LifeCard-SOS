@@ -43,7 +43,7 @@ class DashboardView extends ConsumerWidget {
                         child: CircularProgressIndicator(strokeWidth: 2),
                       ),
                     ),
-                    error: (_, __) => const CircleAvatar(
+                    error: (err, stack) => const CircleAvatar(
                       backgroundColor: Colors.white,
                       child: Icon(Icons.person, color: Colors.grey),
                     ),
@@ -62,7 +62,7 @@ class DashboardView extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryRed.withOpacity(0.1),
+                  color: AppColors.primaryRed.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -86,12 +86,12 @@ class DashboardView extends ConsumerWidget {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: context.colorScheme.onBackground,
+                color: context.colorScheme.onSurface,
                 height: 1.2,
               ),
             ).animate().fadeIn(delay: 100.ms, duration: 400.ms).slideX(begin: -0.05, end: 0),
             loading: () => const Text('Loading...'),
-            error: (_, __) => const Text('Guest'),
+            error: (err, stack) => const Text('Guest'),
           ),
           const SizedBox(height: 20),
 
@@ -135,7 +135,7 @@ class DashboardView extends ConsumerWidget {
               ),
             ).animate().fadeIn(delay: 200.ms, duration: 400.ms).slideY(begin: 0.05, end: 0),
             loading: () => const Card(child: SizedBox(height: 100)),
-            error: (_, __) => const Card(child: SizedBox(height: 100)),
+            error: (err, stack) => const Card(child: SizedBox(height: 100)),
           ),
           const SizedBox(height: 24),
 
@@ -145,7 +145,7 @@ class DashboardView extends ConsumerWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: context.colorScheme.onBackground,
+              color: context.colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 12),
@@ -213,7 +213,7 @@ class DashboardView extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
+                        color: color.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(icon, color: color, size: 28),
@@ -237,7 +237,7 @@ class DashboardView extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
+                        color: color.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(icon, color: color, size: 22),

@@ -19,36 +19,37 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Choose Theme Mode'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildThemeOption(settings, 'system', 'System Default'),
-            _buildThemeOption(settings, 'light', 'Light Mode'),
-            _buildThemeOption(settings, 'dark', 'Dark Mode'),
-            _buildThemeOption(settings, 'amoled', 'AMOLED Pure Black'),
-          ],
+        content: RadioGroup<String>(
+          groupValue: settings.themeMode,
+          onChanged: (val) {
+            if (val != null) {
+              ref.read(settingsProvider.notifier).updateSettings(
+                    settings.copyWith(themeMode: val),
+                  );
+              Navigator.pop(context);
+            }
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildThemeOption('system', 'System Default'),
+              _buildThemeOption('light', 'Light Mode'),
+              _buildThemeOption('dark', 'Dark Mode'),
+              _buildThemeOption('amoled', 'AMOLED Pure Black'),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildThemeOption(
-    AppSettings settings,
     String value,
     String label,
   ) {
     return RadioListTile<String>(
       title: Text(label),
       value: value,
-      groupValue: settings.themeMode,
-      onChanged: (val) {
-        if (val != null) {
-          ref.read(settingsProvider.notifier).updateSettings(
-                settings.copyWith(themeMode: val),
-              );
-          Navigator.pop(context);
-        }
-      },
     );
   }
 
@@ -57,38 +58,39 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('SOS Countdown Duration'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildCountdownOption(settings, 1, '1 Seconds'),
-            _buildCountdownOption(settings, 3, '3 Seconds'),
-            _buildCountdownOption(settings, 5, '5 Seconds'),
-            _buildCountdownOption(settings, 10, '10 Seconds'),
-            _buildCountdownOption(settings, 15, '15 Seconds'),
-            _buildCountdownOption(settings, 30, '30 Seconds'),
-          ],
+        content: RadioGroup<int>(
+          groupValue: settings.sosCountdownSeconds,
+          onChanged: (val) {
+            if (val != null) {
+              ref.read(settingsProvider.notifier).updateSettings(
+                    settings.copyWith(sosCountdownSeconds: val),
+                  );
+              Navigator.pop(context);
+            }
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildCountdownOption(1, '1 Seconds'),
+              _buildCountdownOption(3, '3 Seconds'),
+              _buildCountdownOption(5, '5 Seconds'),
+              _buildCountdownOption(10, '10 Seconds'),
+              _buildCountdownOption(15, '15 Seconds'),
+              _buildCountdownOption(30, '30 Seconds'),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildCountdownOption(
-    AppSettings settings,
     int value,
     String label,
   ) {
     return RadioListTile<int>(
       title: Text(label),
       value: value,
-      groupValue: settings.sosCountdownSeconds,
-      onChanged: (val) {
-        if (val != null) {
-          ref.read(settingsProvider.notifier).updateSettings(
-                settings.copyWith(sosCountdownSeconds: val),
-              );
-          Navigator.pop(context);
-        }
-      },
     );
   }
 
@@ -99,7 +101,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
 
     return settingsAsync.when(
       data: (settings) => Scaffold(
-        backgroundColor: context.colorScheme.background,
+        backgroundColor: context.theme.scaffoldBackgroundColor,
         appBar: AppBar(
           title: const Text('Settings'),
         ),
@@ -212,7 +214,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         ),
       ),
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (_, __) => const Scaffold(body: Center(child: Text('Error loading settings'))),
+      error: (err, stack) => const Scaffold(body: Center(child: Text('Error loading settings'))),
     );
   }
 
@@ -245,7 +247,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, color: color, size: 20),
@@ -271,7 +273,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, color: color, size: 20),
@@ -281,7 +283,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
         trailing: Switch(
           value: value,
           onChanged: onChanged,
-          activeColor: AppColors.primaryRed,
+          activeThumbColor: AppColors.primaryRed,
         ),
       ),
     );

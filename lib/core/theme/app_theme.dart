@@ -8,12 +8,12 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
+      scaffoldBackgroundColor: AppColors.offWhite,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primaryRed,
         brightness: Brightness.light,
         primary: AppColors.primaryRed,
         surface: AppColors.pureWhite,
-        background: AppColors.offWhite,
       ),
       textTheme: GoogleFonts.outfitTextTheme(ThemeData.light().textTheme),
       cardTheme: const CardThemeData(
@@ -46,12 +46,12 @@ class AppTheme {
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
+      scaffoldBackgroundColor: AppColors.darkBackground,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primaryRed,
         brightness: Brightness.dark,
         primary: AppColors.primaryRed,
         surface: AppColors.cardDark,
-        background: AppColors.darkBackground,
       ),
       textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme),
       cardTheme: const CardThemeData(
@@ -84,12 +84,12 @@ class AppTheme {
   static ThemeData get amoledTheme {
     return ThemeData(
       useMaterial3: true,
+      scaffoldBackgroundColor: AppColors.amoledBlack,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primaryRed,
         brightness: Brightness.dark,
         primary: AppColors.primaryRed,
         surface: Colors.black,
-        background: AppColors.amoledBlack,
       ),
       textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme),
       cardTheme: const CardThemeData(

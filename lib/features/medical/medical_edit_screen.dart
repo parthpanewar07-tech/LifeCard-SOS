@@ -150,7 +150,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Edit Medical Profile'),
         actions: [
@@ -256,7 +256,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: context.colorScheme.onSurface.withOpacity(0.12)),
+          borderSide: BorderSide(color: context.colorScheme.onSurface.withValues(alpha: 0.12)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -274,7 +274,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
     required ValueChanged<String?> onChanged,
   }) {
     return DropdownButtonFormField<String>(
-      value: value,
+      initialValue: value,
       items: items.map((i) => DropdownMenuItem(value: i, child: Text(i))).toList(),
       onChanged: onChanged,
       decoration: InputDecoration(
@@ -288,7 +288,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: context.colorScheme.onSurface.withOpacity(0.12)),
+          borderSide: BorderSide(color: context.colorScheme.onSurface.withValues(alpha: 0.12)),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
@@ -297,10 +297,10 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
 
   Widget _buildSwitchTile(String label, bool value, ValueChanged<bool> onChanged) {
     return SwitchListTile(
-      title: Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: context.colorScheme.onBackground)),
+      title: Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: context.colorScheme.onSurface)),
       value: value,
       onChanged: onChanged,
-      activeColor: AppColors.primaryRed,
+      activeThumbColor: AppColors.primaryRed,
       contentPadding: EdgeInsets.zero,
     );
   }

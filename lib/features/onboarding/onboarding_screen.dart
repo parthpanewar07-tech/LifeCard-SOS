@@ -50,7 +50,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -142,7 +142,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: context.colorScheme.onBackground,
+              color: context.colorScheme.onSurface,
               letterSpacing: -0.5,
             ),
           ).animate().fadeIn(duration: 500.ms).slideY(begin: 0.1, end: 0),
@@ -214,7 +214,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: context.colorScheme.onBackground,
+              color: context.colorScheme.onSurface,
             ),
           ).animate().fadeIn(duration: 400.ms),
           const SizedBox(height: 8),
@@ -314,7 +314,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: context.colorScheme.onBackground,
+              color: context.colorScheme.onSurface,
             ),
           ).animate().fadeIn(duration: 400.ms),
           const SizedBox(height: 8),
@@ -415,7 +415,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(icon, color: color, size: 20),
@@ -464,7 +464,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(icon, color: color, size: 20),
@@ -493,7 +493,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Switch(
               value: value,
               onChanged: onChanged,
-              activeColor: AppColors.primaryRed,
+              activeThumbColor: AppColors.primaryRed,
             ),
           ],
         ),

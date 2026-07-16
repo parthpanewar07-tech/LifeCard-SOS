@@ -93,7 +93,7 @@ class _ContactAddEditScreenState extends ConsumerState<ContactAddEditScreen> {
     final isEditMode = widget.contactId != null;
 
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: Text(isEditMode ? 'Edit Contact' : 'Add Emergency Contact'),
         actions: [
@@ -190,19 +190,19 @@ class _ContactAddEditScreenState extends ConsumerState<ContactAddEditScreen> {
             // Preference switches
             const Divider(height: 32),
             SwitchListTile(
-              title: Text('Send SOS Coordinates', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: context.colorScheme.onBackground)),
+              title: Text('Send SOS Coordinates', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: context.colorScheme.onSurface)),
               subtitle: const Text('Automatically text location details when SOS is triggered', style: TextStyle(fontSize: 11, color: Colors.grey)),
               value: _sendSms,
               onChanged: (val) => setState(() => _sendSms = val),
-              activeColor: AppColors.primaryRed,
+              activeThumbColor: AppColors.primaryRed,
               contentPadding: EdgeInsets.zero,
             ),
             SwitchListTile(
-              title: Text('Mark as Favorite', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: context.colorScheme.onBackground)),
+              title: Text('Mark as Favorite', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: context.colorScheme.onSurface)),
               subtitle: const Text('Pin to dashboard shortcuts list', style: TextStyle(fontSize: 11, color: Colors.grey)),
               value: _isFavorite,
               onChanged: (val) => setState(() => _isFavorite = val),
-              activeColor: AppColors.primaryRed,
+              activeThumbColor: AppColors.primaryRed,
               contentPadding: EdgeInsets.zero,
             ),
             const SizedBox(height: 40),
@@ -236,7 +236,7 @@ class _ContactAddEditScreenState extends ConsumerState<ContactAddEditScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: context.colorScheme.onSurface.withOpacity(0.12)),
+          borderSide: BorderSide(color: context.colorScheme.onSurface.withValues(alpha: 0.12)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

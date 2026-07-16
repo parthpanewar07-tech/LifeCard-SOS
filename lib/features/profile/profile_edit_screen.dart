@@ -150,7 +150,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colorScheme.background,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: AppBar(
         title: const Text('Edit Personal Profile'),
         actions: [
@@ -347,7 +347,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: context.colorScheme.onSurface.withOpacity(0.12)),
+          borderSide: BorderSide(color: context.colorScheme.onSurface.withValues(alpha: 0.12)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -365,7 +365,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     required ValueChanged<String?> onChanged,
   }) {
     return DropdownButtonFormField<String>(
-      value: value,
+      initialValue: value,
       items: items.map((i) => DropdownMenuItem(value: i, child: Text(i))).toList(),
       onChanged: onChanged,
       decoration: InputDecoration(
@@ -379,7 +379,7 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: context.colorScheme.onSurface.withOpacity(0.12)),
+          borderSide: BorderSide(color: context.colorScheme.onSurface.withValues(alpha: 0.12)),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),

@@ -6,11 +6,7 @@ import 'package:path_provider/path_provider.dart';
 class SecureDb {
   SecureDb._(); // Private constructor
 
-  static const _storage = FlutterSecureStorage(
-    aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
-    ),
-  );
+  static const _storage = FlutterSecureStorage();
   static const _keyAlias = 'secure_db_key_aes256';
 
   static List<int>? _encryptionKey;
@@ -53,8 +49,6 @@ class SecureDb {
   /// Helper to wipe everything (for developer settings / database reset)
   static Future<void> wipeAllData() async {
     await Hive.close();
-    final appDir = await getApplicationDocumentsDirectory();
-    final directory = Hive.box(appDir.path); // path reference
     await Hive.deleteFromDisk();
     await _storage.delete(key: _keyAlias);
     _initialized = false;
