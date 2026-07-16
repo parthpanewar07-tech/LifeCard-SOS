@@ -1,0 +1,63 @@
+LIFECARD SOS - PROJECT SUMMARY & CHANGE LOG
+
+=========================================
+1. PROJECT DESCRIPTION
+=========================================
+LifeCard SOS is an offline-first Emergency Medical ID and SOS tracking application built in Flutter. It securely stores critical user information (allergies, medical conditions, blood group, medications, and primary care contacts) on-device using Hive CE + AES encryption. In an emergency, it facilitates countdown-based alarms, audio sirens, flashlight flashing, geolocated SMS updates, and lock screen widgets.
+
+=========================================
+2. FOLDER & FILE STRUCTURE
+=========================================
+lib/
+├── main.dart                      # App entry point (initializes DB, theme & Riverpod scopes)
+├── core/                          # Cross-cutting concerns & shared infrastructure
+│   ├── constants/                 # App color palettes and style constants
+│   ├── database/                  # Encrypted database initializer (Hive CE + KeyStore)
+│   ├── extensions/                # Context and style helper extensions
+│   ├── routing/                   # Route settings configuration (GoRouter)
+│   ├── security/                  # Offsite data encryption helper
+│   └── theme/                     # Light, dark, and AMOLED themes
+├── features/                      # Screen views and feature-level UI logic
+│   ├── contacts/                  # Emergency contacts viewer and editor
+│   ├── home/                      # Tab shell wrapper and dashboard view
+│   ├── medical/                   # Detailed medical ID cards viewer and editor
+│   ├── onboarding/                # App welcome tutorial and permissions setup flow
+│   ├── profile/                   # Basic personal details editor
+│   ├── settings/                  # Countdown duration settings, themes, and language preference toggles
+│   └── sos/                       # Panic countdown, siren sound, and flashing UI controls
+├── models/                        # Serialized schemas with Freezed annotations
+├── repositories/                  # DB data access wrappers (profile, settings, helplines, etc.)
+├── services/                      # Low-level service tasks (alarm audio, geolocating, local notifications)
+└── shared/                        # App-wide Riverpod provider configurations
+
+=========================================
+3. RECENT CHANGES (QR & CAMERA REMOVAL)
+=========================================
+We removed the offline QR Code signature export/scanner system and its accompanying camera requirements to streamline the app.
+
+- DELETED MODULES:
+  * Deleted 'lib/features/qr/' (removed qr_screen.dart entirely).
+
+- FILE MODIFICATIONS:
+  * lib/core/routing/app_router.dart:
+    - Removed /qr navigation route and QrScreen references.
+    - Cleaned up unused import 'package:flutter/material.dart'.
+  * lib/features/medical/medical_view.dart:
+    - Removed the QR code icon button from the AppBar actions list.
+  * lib/features/home/dashboard_view.dart:
+    - Removed the 'QR Code' quick action card.
+    - Redesigned quick action section from a 2x2 grid to a custom layout containing:
+      * A prominent full-width 'Trigger SOS' card with a chevron.
+      * A row containing 'Medical Card' and 'Contacts' side-by-side.
+    - Updated the '_buildActionCard' widget to handle dynamic width layout.
+  * lib/features/onboarding/onboarding_screen.dart:
+    - Removed camera permission request and verification variables.
+    - Removed camera checklist item card from the permissions screen.
+  * pubspec.yaml:
+    - Removed 'mobile_scanner' (Camera barcode reader dependency).
+    - Removed 'qr_flutter' (QR Code image generator dependency).
+    - Removed 'share_plus' (Platform sharing intent dependency).
+
+- VALIDATION STATUS:
+  * Ran 'flutter pub get' to clean lockfile.
+  * Ran 'flutter analyze' to verify compiler success (0 errors, 100% build ready).
