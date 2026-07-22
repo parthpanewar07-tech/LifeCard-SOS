@@ -10,9 +10,9 @@
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
     <application
-        android:label="life_card_and_sos"
+        android:label="LifeCard & SOS"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
