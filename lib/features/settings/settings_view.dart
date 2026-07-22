@@ -5,6 +5,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/extensions/context_extensions.dart';
 import '../../models/app_settings.dart';
 import '../../shared/providers.dart';
+import '../../shared/widgets/pin_dialog.dart';
 import 'package:home_widget/home_widget.dart';
 
 class SettingsView extends ConsumerStatefulWidget {
@@ -188,6 +189,33 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     );
   }
 
+  Future<void> _manageSecurityPin(AppSettings settings) async {
+    if (settings.pinCode.isNotEmpty) {
+      final verified = await PinDialog.verifyPin(
+        context,
+        settings.pinCode,
+        title: 'Current PIN Required',
+        subtitle: 'Enter current 4-digit PIN to update security',
+      );
+      if (!verified) return;
+    }
+    if (!mounted) return;
+    final newPin = await PinDialog.setupPin(
+      context,
+      existingPin: settings.pinCode,
+    );
+    if (newPin != null) {
+      await ref.read(settingsProvider.notifier).updateSettings(
+            settings.copyWith(pinCode: newPin),
+          );
+      if (mounted) {
+        context.showSnackBar(
+          newPin.isNotEmpty ? 'Security PIN saved successfully.' : 'Security PIN removed.',
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final settingsAsync = ref.watch(settingsProvider);
@@ -202,13 +230,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           children: [
             // PROFILE & SECURITY
-            _buildSectionHeader('PROFILE'),
+            _buildSectionHeader('PROFILE & SECURITY'),
             _buildSettingTile(
               icon: Icons.person,
               color: AppColors.primaryRed,
               title: 'Personal Profile',
               subtitle: 'Medical ID & Basic Info',
               onTap: () => context.push('/profile/edit'),
+            ),
+            _buildSettingTile(
+              icon: Icons.lock_outline_rounded,
+              color: AppColors.primaryRed,
+              title: 'Security PIN',
+              subtitle: settings.pinCode.isNotEmpty
+                  ? 'PIN Active (Protecting Profile & Medical Edit)'
+                  : 'Not Set (Tap to protect Edit Profile & Medical screen)',
+              onTap: () => _manageSecurityPin(settings),
             ),
 
             // EMERGENCY PREFERENCES
@@ -220,6 +257,30 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               title: 'SOS Countdown',
               subtitle: 'Set to ${settings.sosCountdownSeconds} seconds',
               onTap: () => _showCountdownDialog(settings),
+            ),
+            _buildSettingTileWithSwitch(
+              icon: Icons.flashlight_on_rounded,
+              color: AppColors.phoneOrange,
+              title: 'Auto Flashlight on SOS',
+              subtitle: 'Flash camera light when SOS is triggered',
+              value: settings.autoFlashlightOnSos,
+              onChanged: (val) {
+                ref.read(settingsProvider.notifier).updateSettings(
+                      settings.copyWith(autoFlashlightOnSos: val),
+                    );
+              },
+            ),
+            _buildSettingTileWithSwitch(
+              icon: Icons.volume_up_rounded,
+              color: AppColors.phoneOrange,
+              title: 'Auto Siren Alarm on SOS',
+              subtitle: 'Play loud siren alarm when SOS is triggered',
+              value: settings.autoAlarmOnSos,
+              onChanged: (val) {
+                ref.read(settingsProvider.notifier).updateSettings(
+                      settings.copyWith(autoAlarmOnSos: val),
+                    );
+              },
             ),
             _buildSettingTile(
               icon: Icons.lock,

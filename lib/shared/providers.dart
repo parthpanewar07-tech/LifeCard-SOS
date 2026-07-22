@@ -10,13 +10,17 @@ import '../repositories/medical_repository.dart';
 import '../repositories/contact_repository.dart';
 import '../repositories/helpline_repository.dart';
 
+/// Centralized Riverpod Dependency Injection & Reactive Notifier Layer
+/// Manages reactive application state and encrypted local persistence (Hive CE).
+
 // Repository Providers
 final settingsRepositoryProvider = Provider((ref) => SettingsRepository());
 final profileRepositoryProvider = Provider((ref) => ProfileRepository());
 final medicalRepositoryProvider = Provider((ref) => MedicalRepository());
 final contactRepositoryProvider = Provider((ref) => ContactRepository());
 final helplineRepositoryProvider = Provider((ref) => HelplineRepository());
-// Initial navigation location (can be overridden on widget launch)
+
+/// Initial navigation location (can be overridden during cold launch from widgets or app shortcuts)
 final initialLocationProvider = Provider<String>((ref) => '/');
 
 // Settings Notifier

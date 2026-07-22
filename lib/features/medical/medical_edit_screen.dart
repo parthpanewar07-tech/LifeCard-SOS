@@ -5,6 +5,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/extensions/context_extensions.dart';
 import '../../models/medical_profile.dart';
 import '../../shared/providers.dart';
+import '../../shared/widgets/pin_dialog.dart';
 
 class MedicalEditScreen extends ConsumerStatefulWidget {
   const MedicalEditScreen({super.key});
@@ -15,6 +16,7 @@ class MedicalEditScreen extends ConsumerStatefulWidget {
 
 class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
   final _formKey = GlobalKey<FormState>();
+  bool _isPinVerified = false;
 
   late TextEditingController _conditionsController;
   late TextEditingController _allergiesController;
@@ -40,6 +42,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
   bool _asthma = false;
   bool _heartDisease = false;
   bool _kidneyDisease = false;
+  bool _cancer = false;
   bool _epilepsy = false;
   bool _pregnancy = false;
 
@@ -48,6 +51,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkPinProtection());
     final med = ref.read(medicalProfileProvider).value ?? const MedicalProfile();
 
     _conditionsController = TextEditingController(text: med.medicalConditions.join(', '));
@@ -74,10 +78,31 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
     _asthma = med.asthma;
     _heartDisease = med.heartDisease;
     _kidneyDisease = med.kidneyDisease;
+    _cancer = med.cancer;
     _epilepsy = med.epilepsy;
     _pregnancy = med.pregnancy;
 
     if (med.rhFactor.isNotEmpty) _rhFactor = med.rhFactor;
+  }
+
+  Future<void> _checkPinProtection() async {
+    final settings = ref.read(settingsProvider).value;
+    final pin = settings?.pinCode ?? '';
+    if (pin.isNotEmpty) {
+      final verified = await PinDialog.verifyPin(
+        context,
+        pin,
+        title: 'Security PIN Required',
+        subtitle: 'Enter 4-digit PIN to edit Medical Profile',
+      );
+      if (!verified && mounted) {
+        context.pop();
+      } else {
+        if (mounted) setState(() => _isPinVerified = true);
+      }
+    } else {
+      if (mounted) setState(() => _isPinVerified = true);
+    }
   }
 
   @override
@@ -125,6 +150,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
       asthma: _asthma,
       heartDisease: _heartDisease,
       kidneyDisease: _kidneyDisease,
+      cancer: _cancer,
       epilepsy: _epilepsy,
       pregnancy: _pregnancy,
       vision: _visionController.text.trim(),
@@ -149,6 +175,19 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = ref.watch(settingsProvider).value;
+    final hasPin = settings?.pinCode.isNotEmpty ?? false;
+
+    if (hasPin && !_isPinVerified) {
+      return Scaffold(
+        backgroundColor: context.theme.scaffoldBackgroundColor,
+        appBar: AppBar(title: const Text('Edit Medical Profile')),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: AppBar(
@@ -188,6 +227,7 @@ class _MedicalEditScreenState extends ConsumerState<MedicalEditScreen> {
             const Divider(height: 32),
             _buildSectionTitle('Known Illnesses / Statuses'),
             _buildSwitchTile('Asthma', _asthma, (val) => setState(() => _asthma = val)),
+            _buildSwitchTile('Cancer', _cancer, (val) => setState(() => _cancer = val)),
             _buildSwitchTile('Diabetes', _diabetes, (val) => setState(() => _diabetes = val)),
             _buildSwitchTile('Epilepsy', _epilepsy, (val) => setState(() => _epilepsy = val)),
             _buildSwitchTile('Heart Disease', _heartDisease, (val) => setState(() => _heartDisease = val)),

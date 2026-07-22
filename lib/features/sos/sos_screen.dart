@@ -14,6 +14,7 @@ import '../../services/sms_service.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SosScreen extends ConsumerStatefulWidget {
   const SosScreen({super.key});
@@ -101,16 +102,24 @@ class _SosScreenState extends ConsumerState<SosScreen> {
   }
 
   void _triggerSosAlerts() {
+    final settings = ref.read(settingsProvider).value;
+    final autoAlarm = settings?.autoAlarmOnSos ?? true;
+    final autoFlashlight = settings?.autoFlashlightOnSos ?? true;
+
     setState(() {
       _isCountdownActive = false;
-      _isAlarmActive = true;
+      _isAlarmActive = autoAlarm;
     });
 
-    // Start siren
-    AudioService.playSiren();
+    // Start siren if enabled in settings
+    if (autoAlarm) {
+      AudioService.playSiren();
+    }
 
-    // Start flashlight blink
-    _startFlashlightBlink();
+    // Start flashlight blink if enabled in settings
+    if (autoFlashlight) {
+      _startFlashlightBlink();
+    }
 
     // Display SOS Notification
     NotificationService.showSosNotification();
@@ -322,6 +331,7 @@ class _SosScreenState extends ConsumerState<SosScreen> {
     final profile = ref.watch(profileProvider).value;
     final medical = ref.watch(medicalProfileProvider).value;
     final contacts = ref.watch(contactsProvider).value ?? [];
+    final helplines = ref.watch(helplinesProvider).value ?? [];
 
     return Scaffold(
       backgroundColor: AppColors.amoledBlack,
@@ -472,11 +482,13 @@ class _SosScreenState extends ConsumerState<SosScreen> {
                   ),
                   const SizedBox(height: 12),
 
-                  // Medical Alerts Box (Allergies / Conditions)
+                  // Medical Alerts Box (Allergies / Conditions / Illnesses)
                   if (medical != null) ...[
                     _buildSosSection('MEDICAL CONDITIONS', medical.medicalConditions.isEmpty ? ['None Specified'] : medical.medicalConditions),
                     const SizedBox(height: 12),
-                    _buildSosSection('ALLERGIES & REACTIONS', medical.allergies.isEmpty ? ['None Specified'] : medical.allergies),
+                    _buildSosSection('KNOWN ILLNESSES & STATUSES', _getKnownIllnessesAndStatuses(medical)),
+                    const SizedBox(height: 12),
+                    _buildSosSection('ALLERGIES & REACTIONS', _getAllergies(medical)),
                     const SizedBox(height: 12),
                     _buildSosSection('CURRENT MEDICINES', medical.currentMedicines.isEmpty ? ['None Specified'] : medical.currentMedicines),
                     const SizedBox(height: 12),
@@ -500,20 +512,87 @@ class _SosScreenState extends ConsumerState<SosScreen> {
                               style: TextStyle(color: AppColors.primaryRed, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1),
                             ),
                             const SizedBox(height: 12),
-                            ...contacts.take(2).map((contact) => Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${contact.name} (${contact.relationship})',
-                                    style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    contact.primaryPhone,
-                                    style: const TextStyle(color: Colors.cyan, fontSize: 14, fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                            ...contacts.map((contact) => InkWell(
+                              onTap: () => _makePhoneCall(contact.primaryPhone),
+                              borderRadius: BorderRadius.circular(8),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${contact.name} (${contact.relationship})',
+                                        style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.phone, color: Colors.cyan, size: 14),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          contact.primaryPhone,
+                                          style: const TextStyle(color: Colors.cyan, fontSize: 14, fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
+
+                  // Official Helplines
+                  if (helplines.isNotEmpty) ...[
+                    Card(
+                      color: const Color(0xFF1E1E1E),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        side: const BorderSide(color: Color(0xFF333333)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'OFFICIAL HELPLINES',
+                              style: TextStyle(color: AppColors.locationBlue, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 1),
+                            ),
+                            const SizedBox(height: 12),
+                            ...helplines.map((helpline) => InkWell(
+                              onTap: () => _makePhoneCall(helpline.number),
+                              borderRadius: BorderRadius.circular(8),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        '${helpline.name} (${helpline.category})',
+                                        style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.phone, color: Colors.cyan, size: 14),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          helpline.number,
+                                          style: const TextStyle(color: Colors.cyan, fontSize: 14, fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             )),
                           ],
@@ -816,5 +895,48 @@ class _SosScreenState extends ConsumerState<SosScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final cleanNum = phoneNumber.replaceAll(RegExp(r'[^\d+]'), '');
+    if (cleanNum.isEmpty) return;
+    final uri = Uri.parse('tel:$cleanNum');
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  List<String> _getKnownIllnessesAndStatuses(dynamic med) {
+    final list = <String>[];
+    if (med.asthma == true) list.add('Asthma');
+    if (med.cancer == true) list.add('Cancer');
+    if (med.diabetes == true) list.add('Diabetes');
+    if (med.epilepsy == true) list.add('Epilepsy');
+    if (med.heartDisease == true) list.add('Heart Disease');
+    if (med.kidneyDisease == true) list.add('Kidney Disease');
+    if (med.pregnancy == true) list.add('Pregnancy');
+    if (med.organDonor == true) list.add('Organ Donor');
+    if (med.disabilities != null && (med.disabilities as List).isNotEmpty) {
+      list.add('Disabilities: ${(med.disabilities as List).join(", ")}');
+    }
+    if (med.bloodPressure != null && (med.bloodPressure as String).isNotEmpty) {
+      list.add('Usual BP: ${med.bloodPressure}');
+    }
+    if (med.vision != null && (med.vision as String).isNotEmpty) {
+      list.add('Vision: ${med.vision}');
+    }
+    if (med.hearing != null && (med.hearing as String).isNotEmpty) {
+      list.add('Hearing: ${med.hearing}');
+    }
+    return list.isEmpty ? ['None Specified'] : list;
+  }
+
+  List<String> _getAllergies(dynamic med) {
+    final list = <String>[
+      ...((med.allergies as List<String>?) ?? []),
+      ...((med.foodAllergies as List<String>?) ?? []),
+      ...((med.medicineAllergies as List<String>?) ?? []),
+    ].where((e) => e.trim().isNotEmpty).toSet().toList();
+    return list.isEmpty ? ['None Specified'] : list;
   }
 }

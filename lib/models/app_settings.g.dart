@@ -19,6 +19,8 @@ _AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => _AppSettings(
       json['sosSmsMessageTemplate'] as String? ??
       "HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below",
   isSetupCompleted: json['isSetupCompleted'] as bool? ?? false,
+  autoFlashlightOnSos: json['autoFlashlightOnSos'] as bool? ?? true,
+  autoAlarmOnSos: json['autoAlarmOnSos'] as bool? ?? true,
 );
 
 Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) =>
@@ -32,4 +34,6 @@ Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) =>
       'showOnLockScreen': instance.showOnLockScreen,
       'sosSmsMessageTemplate': instance.sosSmsMessageTemplate,
       'isSetupCompleted': instance.isSetupCompleted,
+      'autoFlashlightOnSos': instance.autoFlashlightOnSos,
+      'autoAlarmOnSos': instance.autoAlarmOnSos,
     };

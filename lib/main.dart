@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:home_widget/home_widget.dart';
 import 'core/database/secure_db.dart';
 import 'core/theme/app_theme.dart';
@@ -124,13 +125,16 @@ class _LifeCardAppState extends ConsumerState<LifeCardApp> {
             darkTheme = AppTheme.darkTheme;
         }
 
-        return MaterialApp.router(
+        return GetMaterialApp.router(
           title: 'LifeCard SOS',
           debugShowCheckedModeBanner: false,
           themeMode: themeMode,
           theme: theme,
           darkTheme: darkTheme,
-          routerConfig: router,
+          routeInformationProvider: router.routeInformationProvider,
+          routeInformationParser: router.routeInformationParser,
+          routerDelegate: router.routerDelegate,
+          backButtonDispatcher: router.backButtonDispatcher,
         );
       },
       loading: () => const MaterialApp(

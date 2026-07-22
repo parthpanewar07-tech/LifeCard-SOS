@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
- String get themeMode; bool get useDynamicColor; bool get biometricEnabled; String get pinCode; int get sosCountdownSeconds; bool get persistentNotificationEnabled; bool get showOnLockScreen; String get sosSmsMessageTemplate; bool get isSetupCompleted;
+ String get themeMode; bool get useDynamicColor; bool get biometricEnabled; String get pinCode; int get sosCountdownSeconds; bool get persistentNotificationEnabled; bool get showOnLockScreen; String get sosSmsMessageTemplate; bool get isSetupCompleted; bool get autoFlashlightOnSos; bool get autoAlarmOnSos;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AppSettingsCopyWith<AppSettings> get copyWith => _$AppSettingsCopyWithImpl<AppS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted)&&(identical(other.autoFlashlightOnSos, autoFlashlightOnSos) || other.autoFlashlightOnSos == autoFlashlightOnSos)&&(identical(other.autoAlarmOnSos, autoAlarmOnSos) || other.autoAlarmOnSos == autoAlarmOnSos));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted,autoFlashlightOnSos,autoAlarmOnSos);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted, autoFlashlightOnSos: $autoFlashlightOnSos, autoAlarmOnSos: $autoAlarmOnSos)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- String themeMode, bool useDynamicColor, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted
+ String themeMode, bool useDynamicColor, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted, bool autoFlashlightOnSos, bool autoAlarmOnSos
 });
 
 
@@ -65,7 +65,7 @@ class _$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,Object? autoFlashlightOnSos = null,Object? autoAlarmOnSos = null,}) {
   return _then(_self.copyWith(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as String,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
@@ -76,6 +76,8 @@ as int,persistentNotificationEnabled: null == persistentNotificationEnabled ? _s
 as bool,showOnLockScreen: null == showOnLockScreen ? _self.showOnLockScreen : showOnLockScreen // ignore: cast_nullable_to_non_nullable
 as bool,sosSmsMessageTemplate: null == sosSmsMessageTemplate ? _self.sosSmsMessageTemplate : sosSmsMessageTemplate // ignore: cast_nullable_to_non_nullable
 as String,isSetupCompleted: null == isSetupCompleted ? _self.isSetupCompleted : isSetupCompleted // ignore: cast_nullable_to_non_nullable
+as bool,autoFlashlightOnSos: null == autoFlashlightOnSos ? _self.autoFlashlightOnSos : autoFlashlightOnSos // ignore: cast_nullable_to_non_nullable
+as bool,autoAlarmOnSos: null == autoAlarmOnSos ? _self.autoAlarmOnSos : autoAlarmOnSos // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -161,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted,  bool autoFlashlightOnSos,  bool autoAlarmOnSos)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted,_that.autoFlashlightOnSos,_that.autoAlarmOnSos);case _:
   return orElse();
 
 }
@@ -182,10 +184,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted,  bool autoFlashlightOnSos,  bool autoAlarmOnSos)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
-return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted,_that.autoFlashlightOnSos,_that.autoAlarmOnSos);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +204,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted,  bool autoFlashlightOnSos,  bool autoAlarmOnSos)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted,_that.autoFlashlightOnSos,_that.autoAlarmOnSos);case _:
   return null;
 
 }
@@ -217,7 +219,7 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_th
 @JsonSerializable()
 
 class _AppSettings implements AppSettings {
-  const _AppSettings({this.themeMode = 'system', this.useDynamicColor = true, this.biometricEnabled = false, this.pinCode = '', this.sosCountdownSeconds = 5, this.persistentNotificationEnabled = true, this.showOnLockScreen = true, this.sosSmsMessageTemplate = "HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below", this.isSetupCompleted = false});
+  const _AppSettings({this.themeMode = 'system', this.useDynamicColor = true, this.biometricEnabled = false, this.pinCode = '', this.sosCountdownSeconds = 5, this.persistentNotificationEnabled = true, this.showOnLockScreen = true, this.sosSmsMessageTemplate = "HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below", this.isSetupCompleted = false, this.autoFlashlightOnSos = true, this.autoAlarmOnSos = true});
   factory _AppSettings.fromJson(Map<String, dynamic> json) => _$AppSettingsFromJson(json);
 
 @override@JsonKey() final  String themeMode;
@@ -229,6 +231,8 @@ class _AppSettings implements AppSettings {
 @override@JsonKey() final  bool showOnLockScreen;
 @override@JsonKey() final  String sosSmsMessageTemplate;
 @override@JsonKey() final  bool isSetupCompleted;
+@override@JsonKey() final  bool autoFlashlightOnSos;
+@override@JsonKey() final  bool autoAlarmOnSos;
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted)&&(identical(other.autoFlashlightOnSos, autoFlashlightOnSos) || other.autoFlashlightOnSos == autoFlashlightOnSos)&&(identical(other.autoAlarmOnSos, autoAlarmOnSos) || other.autoAlarmOnSos == autoAlarmOnSos));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted,autoFlashlightOnSos,autoAlarmOnSos);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted, autoFlashlightOnSos: $autoFlashlightOnSos, autoAlarmOnSos: $autoAlarmOnSos)';
 }
 
 
@@ -263,7 +267,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String themeMode, bool useDynamicColor, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted
+ String themeMode, bool useDynamicColor, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted, bool autoFlashlightOnSos, bool autoAlarmOnSos
 });
 
 
@@ -280,7 +284,7 @@ class __$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,Object? autoFlashlightOnSos = null,Object? autoAlarmOnSos = null,}) {
   return _then(_AppSettings(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as String,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
@@ -291,6 +295,8 @@ as int,persistentNotificationEnabled: null == persistentNotificationEnabled ? _s
 as bool,showOnLockScreen: null == showOnLockScreen ? _self.showOnLockScreen : showOnLockScreen // ignore: cast_nullable_to_non_nullable
 as bool,sosSmsMessageTemplate: null == sosSmsMessageTemplate ? _self.sosSmsMessageTemplate : sosSmsMessageTemplate // ignore: cast_nullable_to_non_nullable
 as String,isSetupCompleted: null == isSetupCompleted ? _self.isSetupCompleted : isSetupCompleted // ignore: cast_nullable_to_non_nullable
+as bool,autoFlashlightOnSos: null == autoFlashlightOnSos ? _self.autoFlashlightOnSos : autoFlashlightOnSos // ignore: cast_nullable_to_non_nullable
+as bool,autoAlarmOnSos: null == autoAlarmOnSos ? _self.autoAlarmOnSos : autoAlarmOnSos // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

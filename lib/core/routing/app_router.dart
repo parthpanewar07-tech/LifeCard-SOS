@@ -12,15 +12,17 @@ import '../../features/medical/medical_view.dart';
 import '../../features/contacts/contact_add_edit_screen.dart';
 import '../../features/contacts/contacts_view.dart';
 
+/// Application Router Configuration (GoRouter + GetX)
+/// Manages app navigation, deep linking from widgets/shortcuts, and onboarding redirection guards.
 final routerProvider = Provider<GoRouter>((ref) {
-  final settingsAsync = ref.watch(settingsProvider);
   final initialLocation = ref.watch(initialLocationProvider);
 
   return GoRouter(
     initialLocation: initialLocation,
+    // Redirection guard: Redirects new users to the 5-step onboarding flow if setup is incomplete.
     redirect: (context, state) {
-      final settings = settingsAsync.value;
-      if (settings == null) return null; // Wait until loaded
+      final settings = ref.read(settingsProvider).value;
+      if (settings == null) return null; // Wait until local settings are loaded from Hive
 
       final isSetupCompleted = settings.isSetupCompleted;
       final isGoingToOnboarding = state.matchedLocation == '/onboarding';

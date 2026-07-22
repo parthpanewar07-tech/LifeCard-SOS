@@ -59,7 +59,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.menu, color: AppColors.primaryRed),
+                    
                     SizedBox(width: 16),
                     Text(
                       'Contacts',

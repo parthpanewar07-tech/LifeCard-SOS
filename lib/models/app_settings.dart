@@ -15,6 +15,8 @@ abstract class AppSettings with _$AppSettings {
     @Default(true) bool showOnLockScreen,
     @Default("HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below") String sosSmsMessageTemplate,
     @Default(false) bool isSetupCompleted,
+    @Default(true) bool autoFlashlightOnSos,
+    @Default(true) bool autoAlarmOnSos,
   }) = _AppSettings;
 
   factory AppSettings.fromJson(Map<String, dynamic> json) =>

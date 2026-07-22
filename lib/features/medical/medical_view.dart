@@ -134,18 +134,24 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
               children: [
                 Expanded(
                   child: profileAsync.when(
-                    data: (profile) => _buildSummaryCard(
-                      context: context,
-                      title: 'BLOOD GROUP',
-                      value: profile.bloodGroup.isEmpty
-                          ? 'Unknown'
-                          : profile.bloodGroup,
-                      isRedValue: profile.bloodGroup.isNotEmpty,
-                      icon: Icons.bloodtype,
-                      iconColor: profile.bloodGroup.isEmpty
-                          ? Colors.grey
-                          : AppColors.primaryRed,
-                    ),
+                    data: (profile) {
+                      final rh = medicalAsync.value?.rhFactor;
+                      final rhText = (rh != null && rh.isNotEmpty && rh != 'Not Specified')
+                          ? ' ($rh)'
+                          : '';
+                      return _buildSummaryCard(
+                        context: context,
+                        title: 'BLOOD GROUP',
+                        value: profile.bloodGroup.isEmpty
+                            ? 'Unknown'
+                            : '${profile.bloodGroup}$rhText',
+                        isRedValue: profile.bloodGroup.isNotEmpty,
+                        icon: Icons.bloodtype,
+                        iconColor: profile.bloodGroup.isEmpty
+                            ? Colors.grey
+                            : AppColors.primaryRed,
+                      );
+                    },
                     loading: () => const SizedBox(height: 120),
                     error: (err, stack) => const SizedBox(height: 120),
                   ),
@@ -188,12 +194,18 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
                   const SizedBox(height: 12),
                   _buildSectionCard(
                     context: context,
+                    icon: Icons.health_and_safety_rounded,
+                    color: Colors.purple,
+                    title: 'Known Illnesses & Statuses',
+                    items: _getKnownIllnessesAndStatuses(med),
+                  ),
+                  const SizedBox(height: 12),
+                  _buildSectionCard(
+                    context: context,
                     icon: Icons.vaccines_rounded,
                     color: AppColors.cameraGreen,
                     title: 'Allergies (Food & Medicine)',
-                    items: med.allergies.isEmpty
-                        ? ['None Specified']
-                        : med.allergies,
+                    items: _getAllergies(med),
                   ),
                   const SizedBox(height: 12),
                   _buildSectionCard(
@@ -349,5 +361,39 @@ class _MedicalViewState extends ConsumerState<MedicalView> {
         ),
       ),
     );
+  }
+
+  List<String> _getKnownIllnessesAndStatuses(dynamic med) {
+    final list = <String>[];
+    if (med.asthma == true) list.add('Asthma');
+    if (med.cancer == true) list.add('Cancer');
+    if (med.diabetes == true) list.add('Diabetes');
+    if (med.epilepsy == true) list.add('Epilepsy');
+    if (med.heartDisease == true) list.add('Heart Disease');
+    if (med.kidneyDisease == true) list.add('Kidney Disease');
+    if (med.pregnancy == true) list.add('Pregnancy');
+    if (med.organDonor == true) list.add('Organ Donor');
+    if (med.disabilities != null && med.disabilities.isNotEmpty) {
+      list.add('Disabilities: ${med.disabilities.join(", ")}');
+    }
+    if (med.bloodPressure != null && med.bloodPressure.isNotEmpty) {
+      list.add('Usual BP: ${med.bloodPressure}');
+    }
+    if (med.vision != null && med.vision.isNotEmpty) {
+      list.add('Vision: ${med.vision}');
+    }
+    if (med.hearing != null && med.hearing.isNotEmpty) {
+      list.add('Hearing: ${med.hearing}');
+    }
+    return list.isEmpty ? ['None Specified'] : list;
+  }
+
+  List<String> _getAllergies(dynamic med) {
+    final list = <String>[
+      ...((med.allergies as List<String>?) ?? []),
+      ...((med.foodAllergies as List<String>?) ?? []),
+      ...((med.medicineAllergies as List<String>?) ?? []),
+    ].where((e) => e.trim().isNotEmpty).toSet().toList();
+    return list.isEmpty ? ['None Specified'] : list;
   }
 }

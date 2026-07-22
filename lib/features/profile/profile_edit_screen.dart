@@ -9,6 +9,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/extensions/context_extensions.dart';
 import '../../models/user_profile.dart';
 import '../../shared/providers.dart';
+import '../../shared/widgets/pin_dialog.dart';
 
 class ProfileEditScreen extends ConsumerStatefulWidget {
   const ProfileEditScreen({super.key});
@@ -39,10 +40,13 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
   String _gender = 'Male';
   String _bloodGroup = 'Unknown';
   String _photoPath = '';
+  bool _isPinVerified = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkPinProtection());
+
     final profile = ref.read(profileProvider).value ?? const UserProfile();
     _photoPath = profile.photoPath;
 
@@ -67,6 +71,26 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       _bloodGroup = profile.bloodGroup;
     } else {
       _bloodGroup = 'Unknown';
+    }
+  }
+
+  Future<void> _checkPinProtection() async {
+    final settings = ref.read(settingsProvider).value;
+    final pin = settings?.pinCode ?? '';
+    if (pin.isNotEmpty) {
+      final verified = await PinDialog.verifyPin(
+        context,
+        pin,
+        title: 'Security PIN Required',
+        subtitle: 'Enter 4-digit PIN to edit Personal Profile',
+      );
+      if (!verified && mounted) {
+        context.pop();
+      } else {
+        if (mounted) setState(() => _isPinVerified = true);
+      }
+    } else {
+      if (mounted) setState(() => _isPinVerified = true);
     }
   }
 
@@ -146,6 +170,19 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = ref.watch(settingsProvider).value;
+    final hasPin = settings?.pinCode.isNotEmpty ?? false;
+
+    if (hasPin && !_isPinVerified) {
+      return Scaffold(
+        backgroundColor: context.theme.scaffoldBackgroundColor,
+        appBar: AppBar(title: const Text('Edit Personal Profile')),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: context.theme.scaffoldBackgroundColor,
       appBar: AppBar(
