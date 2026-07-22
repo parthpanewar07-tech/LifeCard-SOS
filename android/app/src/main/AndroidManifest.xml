@@ -10,7 +10,7 @@
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
     <application
-        android:label="LifeCard & SOS"
+        android:label="LifeCard &amp; SOS"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
