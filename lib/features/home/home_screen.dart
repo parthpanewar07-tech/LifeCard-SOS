@@ -11,6 +11,8 @@ import '../medical/medical_view.dart';
 import '../contacts/contacts_view.dart';
 import '../settings/settings_view.dart';
 
+import '../../services/notification_service.dart';
+
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -35,7 +37,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(settingsProvider).whenData((settings) {
       if (settings.persistentNotificationEnabled) {
         // Trigger background notification service
-        // NotificationService.showPersistentNotification();
+        NotificationService.showPersistentNotification();
       }
     });
   }

@@ -16,10 +16,30 @@ import android.media.AudioManager
 import android.content.Context
 import java.util.Timer
 import java.util.TimerTask
+import android.content.Intent
+import android.os.Bundle
 
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "com.example.life_card_and_sos/sms"
     private val DEVICE_CHANNEL = "com.lifecard.sos/device"
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        intent?.let { handleLockScreenIntent(it) }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleLockScreenIntent(intent)
+    }
+
+    private fun handleLockScreenIntent(intent: Intent) {
+        val dataStr = intent.dataString ?: ""
+        if (dataStr.contains("lifecard://sos") || dataStr.contains("/sos")) {
+            setActivityShowWhenLocked(true)
+        }
+    }
 
     // Flashlight blinking state
     private var cameraManager: CameraManager? = null
@@ -91,7 +111,38 @@ class MainActivity: FlutterActivity() {
                     stopAlarm()
                     result.success(null)
                 }
+                "setShowWhenLocked" -> {
+                    val show = call.argument<Boolean>("show") ?: false
+                    setActivityShowWhenLocked(show)
+                    result.success(null)
+                }
                 else -> result.notImplemented()
+            }
+        }
+    }
+
+    private fun setActivityShowWhenLocked(show: Boolean) {
+        runOnUiThread {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                this.setShowWhenLocked(show)
+                this.setTurnScreenOn(show)
+            } else {
+                @Suppress("DEPRECATION")
+                if (show) {
+                    window.addFlags(
+                        android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                    )
+                } else {
+                    window.clearFlags(
+                        android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                        android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                    )
+                }
             }
         }
     }

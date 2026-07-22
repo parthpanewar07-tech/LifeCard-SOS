@@ -22,7 +22,6 @@ abstract class UserProfile with _$UserProfile {
     @Default('') String country,
     @Default('') String pinCode,
     @Default('') String occupation,
-    @Default('en') String language,
     String? aadhaar,
     @Default('') String emergencyNotes,
   }) = _UserProfile;

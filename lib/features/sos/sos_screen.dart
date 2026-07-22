@@ -43,6 +43,7 @@ class _SosScreenState extends ConsumerState<SosScreen> {
     super.initState();
     _startCountdown();
     _fetchLocation();
+    _applyLockScreenFlags();
   }
 
   @override
@@ -50,7 +51,20 @@ class _SosScreenState extends ConsumerState<SosScreen> {
     _countdownTimer?.cancel();
     _stopFlashlightBlink();
     AudioService.stopSiren();
+    _clearLockScreenFlags();
     super.dispose();
+  }
+
+  void _applyLockScreenFlags() {
+    ref.read(settingsProvider).whenData((settings) {
+      if (settings.showOnLockScreen) {
+        _channel.invokeMethod('setShowWhenLocked', {'show': true});
+      }
+    });
+  }
+
+  void _clearLockScreenFlags() {
+    _channel.invokeMethod('setShowWhenLocked', {'show': false});
   }
 
   void _startCountdown() {

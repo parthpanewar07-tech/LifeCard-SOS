@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shortcut_sos_short">Trigger SOS</string>
+    <string name="shortcut_sos_long">Trigger Emergency SOS</string>
+    <string name="shortcut_medical_short">Medical Card</string>
+    <string name="shortcut_medical_long">View Medical Card</string>
+</resources>

@@ -9,7 +9,6 @@ part of 'app_settings.dart';
 _AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => _AppSettings(
   themeMode: json['themeMode'] as String? ?? 'system',
   useDynamicColor: json['useDynamicColor'] as bool? ?? true,
-  languageCode: json['languageCode'] as String? ?? 'en',
   biometricEnabled: json['biometricEnabled'] as bool? ?? false,
   pinCode: json['pinCode'] as String? ?? '',
   sosCountdownSeconds: (json['sosCountdownSeconds'] as num?)?.toInt() ?? 5,
@@ -20,16 +19,12 @@ _AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => _AppSettings(
       json['sosSmsMessageTemplate'] as String? ??
       "HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below",
   isSetupCompleted: json['isSetupCompleted'] as bool? ?? false,
-  twilioAccountSid: json['twilioAccountSid'] as String? ?? '',
-  twilioAuthToken: json['twilioAuthToken'] as String? ?? '',
-  twilioFromNumber: json['twilioFromNumber'] as String? ?? '',
 );
 
 Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) =>
     <String, dynamic>{
       'themeMode': instance.themeMode,
       'useDynamicColor': instance.useDynamicColor,
-      'languageCode': instance.languageCode,
       'biometricEnabled': instance.biometricEnabled,
       'pinCode': instance.pinCode,
       'sosCountdownSeconds': instance.sosCountdownSeconds,
@@ -37,7 +32,4 @@ Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) =>
       'showOnLockScreen': instance.showOnLockScreen,
       'sosSmsMessageTemplate': instance.sosSmsMessageTemplate,
       'isSetupCompleted': instance.isSetupCompleted,
-      'twilioAccountSid': instance.twilioAccountSid,
-      'twilioAuthToken': instance.twilioAuthToken,
-      'twilioFromNumber': instance.twilioFromNumber,
     };

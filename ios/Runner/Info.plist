@@ -74,5 +74,37 @@
 	<string>This app requires access to your location to share with your emergency contacts during an SOS event.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera to use the flashlight/torch for SOS alerts.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.example.lifeCardAndSos</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>lifecard</string>
+			</array>
+		</dict>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>lifecard://sos</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Trigger SOS</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeAlarm</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>lifecard://medical</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Medical Card</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeLove</string>
+		</dict>
+	</array>
 </dict>
 </plist>

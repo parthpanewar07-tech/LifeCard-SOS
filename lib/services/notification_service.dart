@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NotificationService {
   NotificationService._();
@@ -14,8 +15,13 @@ class NotificationService {
 
     await _notifications.initialize(
       settings: initSettings,
-      onDidReceiveNotificationResponse: (response) {
-        // Tapping the notification triggers action
+      onDidReceiveNotificationResponse: (response) async {
+        if (response.actionId == 'trigger_sos_action') {
+          final uri = Uri.parse('lifecard://sos');
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri, mode: LaunchMode.externalApplication);
+          }
+        }
       },
     );
     _initialized = true;
@@ -34,6 +40,13 @@ class NotificationService {
       playSound: false,
       enableVibration: false,
       showWhen: false,
+      actions: <AndroidNotificationAction>[
+        AndroidNotificationAction(
+          'trigger_sos_action',
+          'TRIGGER SOS',
+          showsUserInterface: true,
+        ),
+      ],
     );
     const details = NotificationDetails(android: androidDetails);
 

@@ -25,7 +25,6 @@ _UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => _UserProfile(
   country: json['country'] as String? ?? '',
   pinCode: json['pinCode'] as String? ?? '',
   occupation: json['occupation'] as String? ?? '',
-  language: json['language'] as String? ?? 'en',
   aadhaar: json['aadhaar'] as String?,
   emergencyNotes: json['emergencyNotes'] as String? ?? '',
 );
@@ -48,7 +47,6 @@ Map<String, dynamic> _$UserProfileToJson(_UserProfile instance) =>
       'country': instance.country,
       'pinCode': instance.pinCode,
       'occupation': instance.occupation,
-      'language': instance.language,
       'aadhaar': instance.aadhaar,
       'emergencyNotes': instance.emergencyNotes,
     };

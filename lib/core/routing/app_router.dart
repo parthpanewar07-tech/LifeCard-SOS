@@ -14,9 +14,10 @@ import '../../features/contacts/contacts_view.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final settingsAsync = ref.watch(settingsProvider);
+  final initialLocation = ref.watch(initialLocationProvider);
 
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: initialLocation,
     redirect: (context, state) {
       final settings = settingsAsync.value;
       if (settings == null) return null; // Wait until loaded

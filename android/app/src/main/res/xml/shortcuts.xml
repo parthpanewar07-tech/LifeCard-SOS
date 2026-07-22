@@ -1,0 +1,26 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="trigger_sos"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_sos"
+        android:shortcutShortLabel="@string/shortcut_sos_short"
+        android:shortcutLongLabel="@string/shortcut_sos_long">
+        <intent
+            android:action="es.antonborri.home_widget.action.LAUNCH"
+            android:targetPackage="com.example.life_card_and_sos"
+            android:targetClass="com.example.life_card_and_sos.MainActivity"
+            android:data="lifecard://sos" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="view_medical"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_medical"
+        android:shortcutShortLabel="@string/shortcut_medical_short"
+        android:shortcutLongLabel="@string/shortcut_medical_long">
+        <intent
+            android:action="es.antonborri.home_widget.action.LAUNCH"
+            android:targetPackage="com.example.life_card_and_sos"
+            android:targetClass="com.example.life_card_and_sos.MainActivity"
+            android:data="lifecard://medical" />
+    </shortcut>
+</shortcuts>

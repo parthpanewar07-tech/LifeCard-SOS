@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppSettings {
 
- String get themeMode; bool get useDynamicColor; String get languageCode; bool get biometricEnabled; String get pinCode; int get sosCountdownSeconds; bool get persistentNotificationEnabled; bool get showOnLockScreen; String get sosSmsMessageTemplate; bool get isSetupCompleted; String get twilioAccountSid; String get twilioAuthToken; String get twilioFromNumber;
+ String get themeMode; bool get useDynamicColor; bool get biometricEnabled; String get pinCode; int get sosCountdownSeconds; bool get persistentNotificationEnabled; bool get showOnLockScreen; String get sosSmsMessageTemplate; bool get isSetupCompleted;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AppSettingsCopyWith<AppSettings> get copyWith => _$AppSettingsCopyWithImpl<AppS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted)&&(identical(other.twilioAccountSid, twilioAccountSid) || other.twilioAccountSid == twilioAccountSid)&&(identical(other.twilioAuthToken, twilioAuthToken) || other.twilioAuthToken == twilioAuthToken)&&(identical(other.twilioFromNumber, twilioFromNumber) || other.twilioFromNumber == twilioFromNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,languageCode,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted,twilioAccountSid,twilioAuthToken,twilioFromNumber);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, languageCode: $languageCode, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted, twilioAccountSid: $twilioAccountSid, twilioAuthToken: $twilioAuthToken, twilioFromNumber: $twilioFromNumber)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- String themeMode, bool useDynamicColor, String languageCode, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted, String twilioAccountSid, String twilioAuthToken, String twilioFromNumber
+ String themeMode, bool useDynamicColor, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted
 });
 
 
@@ -65,22 +65,18 @@ class _$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? languageCode = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,Object? twilioAccountSid = null,Object? twilioAuthToken = null,Object? twilioFromNumber = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,}) {
   return _then(_self.copyWith(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as String,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
-as bool,languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
-as String,biometricEnabled: null == biometricEnabled ? _self.biometricEnabled : biometricEnabled // ignore: cast_nullable_to_non_nullable
+as bool,biometricEnabled: null == biometricEnabled ? _self.biometricEnabled : biometricEnabled // ignore: cast_nullable_to_non_nullable
 as bool,pinCode: null == pinCode ? _self.pinCode : pinCode // ignore: cast_nullable_to_non_nullable
 as String,sosCountdownSeconds: null == sosCountdownSeconds ? _self.sosCountdownSeconds : sosCountdownSeconds // ignore: cast_nullable_to_non_nullable
 as int,persistentNotificationEnabled: null == persistentNotificationEnabled ? _self.persistentNotificationEnabled : persistentNotificationEnabled // ignore: cast_nullable_to_non_nullable
 as bool,showOnLockScreen: null == showOnLockScreen ? _self.showOnLockScreen : showOnLockScreen // ignore: cast_nullable_to_non_nullable
 as bool,sosSmsMessageTemplate: null == sosSmsMessageTemplate ? _self.sosSmsMessageTemplate : sosSmsMessageTemplate // ignore: cast_nullable_to_non_nullable
 as String,isSetupCompleted: null == isSetupCompleted ? _self.isSetupCompleted : isSetupCompleted // ignore: cast_nullable_to_non_nullable
-as bool,twilioAccountSid: null == twilioAccountSid ? _self.twilioAccountSid : twilioAccountSid // ignore: cast_nullable_to_non_nullable
-as String,twilioAuthToken: null == twilioAuthToken ? _self.twilioAuthToken : twilioAuthToken // ignore: cast_nullable_to_non_nullable
-as String,twilioFromNumber: null == twilioFromNumber ? _self.twilioFromNumber : twilioFromNumber // ignore: cast_nullable_to_non_nullable
-as String,
+as bool,
   ));
 }
 
@@ -165,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  String languageCode,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted,  String twilioAccountSid,  String twilioAuthToken,  String twilioFromNumber)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.languageCode,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted,_that.twilioAccountSid,_that.twilioAuthToken,_that.twilioFromNumber);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted);case _:
   return orElse();
 
 }
@@ -186,10 +182,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.languageCode,_that.b
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  String languageCode,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted,  String twilioAccountSid,  String twilioAuthToken,  String twilioFromNumber)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
-return $default(_that.themeMode,_that.useDynamicColor,_that.languageCode,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted,_that.twilioAccountSid,_that.twilioAuthToken,_that.twilioFromNumber);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +202,10 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.languageCode,_that.b
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String themeMode,  bool useDynamicColor,  String languageCode,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted,  String twilioAccountSid,  String twilioAuthToken,  String twilioFromNumber)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String themeMode,  bool useDynamicColor,  bool biometricEnabled,  String pinCode,  int sosCountdownSeconds,  bool persistentNotificationEnabled,  bool showOnLockScreen,  String sosSmsMessageTemplate,  bool isSetupCompleted)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.themeMode,_that.useDynamicColor,_that.languageCode,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted,_that.twilioAccountSid,_that.twilioAuthToken,_that.twilioFromNumber);case _:
+return $default(_that.themeMode,_that.useDynamicColor,_that.biometricEnabled,_that.pinCode,_that.sosCountdownSeconds,_that.persistentNotificationEnabled,_that.showOnLockScreen,_that.sosSmsMessageTemplate,_that.isSetupCompleted);case _:
   return null;
 
 }
@@ -221,12 +217,11 @@ return $default(_that.themeMode,_that.useDynamicColor,_that.languageCode,_that.b
 @JsonSerializable()
 
 class _AppSettings implements AppSettings {
-  const _AppSettings({this.themeMode = 'system', this.useDynamicColor = true, this.languageCode = 'en', this.biometricEnabled = false, this.pinCode = '', this.sosCountdownSeconds = 5, this.persistentNotificationEnabled = true, this.showOnLockScreen = true, this.sosSmsMessageTemplate = "HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below", this.isSetupCompleted = false, this.twilioAccountSid = '', this.twilioAuthToken = '', this.twilioFromNumber = ''});
+  const _AppSettings({this.themeMode = 'system', this.useDynamicColor = true, this.biometricEnabled = false, this.pinCode = '', this.sosCountdownSeconds = 5, this.persistentNotificationEnabled = true, this.showOnLockScreen = true, this.sosSmsMessageTemplate = "HELP ME!! IT'S AN EMERGENCY!!\n\nPlease reach ASAP to the location below", this.isSetupCompleted = false});
   factory _AppSettings.fromJson(Map<String, dynamic> json) => _$AppSettingsFromJson(json);
 
 @override@JsonKey() final  String themeMode;
 @override@JsonKey() final  bool useDynamicColor;
-@override@JsonKey() final  String languageCode;
 @override@JsonKey() final  bool biometricEnabled;
 @override@JsonKey() final  String pinCode;
 @override@JsonKey() final  int sosCountdownSeconds;
@@ -234,9 +229,6 @@ class _AppSettings implements AppSettings {
 @override@JsonKey() final  bool showOnLockScreen;
 @override@JsonKey() final  String sosSmsMessageTemplate;
 @override@JsonKey() final  bool isSetupCompleted;
-@override@JsonKey() final  String twilioAccountSid;
-@override@JsonKey() final  String twilioAuthToken;
-@override@JsonKey() final  String twilioFromNumber;
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -251,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted)&&(identical(other.twilioAccountSid, twilioAccountSid) || other.twilioAccountSid == twilioAccountSid)&&(identical(other.twilioAuthToken, twilioAuthToken) || other.twilioAuthToken == twilioAuthToken)&&(identical(other.twilioFromNumber, twilioFromNumber) || other.twilioFromNumber == twilioFromNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.useDynamicColor, useDynamicColor) || other.useDynamicColor == useDynamicColor)&&(identical(other.biometricEnabled, biometricEnabled) || other.biometricEnabled == biometricEnabled)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.sosCountdownSeconds, sosCountdownSeconds) || other.sosCountdownSeconds == sosCountdownSeconds)&&(identical(other.persistentNotificationEnabled, persistentNotificationEnabled) || other.persistentNotificationEnabled == persistentNotificationEnabled)&&(identical(other.showOnLockScreen, showOnLockScreen) || other.showOnLockScreen == showOnLockScreen)&&(identical(other.sosSmsMessageTemplate, sosSmsMessageTemplate) || other.sosSmsMessageTemplate == sosSmsMessageTemplate)&&(identical(other.isSetupCompleted, isSetupCompleted) || other.isSetupCompleted == isSetupCompleted));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,languageCode,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted,twilioAccountSid,twilioAuthToken,twilioFromNumber);
+int get hashCode => Object.hash(runtimeType,themeMode,useDynamicColor,biometricEnabled,pinCode,sosCountdownSeconds,persistentNotificationEnabled,showOnLockScreen,sosSmsMessageTemplate,isSetupCompleted);
 
 @override
 String toString() {
-  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, languageCode: $languageCode, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted, twilioAccountSid: $twilioAccountSid, twilioAuthToken: $twilioAuthToken, twilioFromNumber: $twilioFromNumber)';
+  return 'AppSettings(themeMode: $themeMode, useDynamicColor: $useDynamicColor, biometricEnabled: $biometricEnabled, pinCode: $pinCode, sosCountdownSeconds: $sosCountdownSeconds, persistentNotificationEnabled: $persistentNotificationEnabled, showOnLockScreen: $showOnLockScreen, sosSmsMessageTemplate: $sosSmsMessageTemplate, isSetupCompleted: $isSetupCompleted)';
 }
 
 
@@ -271,7 +263,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- String themeMode, bool useDynamicColor, String languageCode, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted, String twilioAccountSid, String twilioAuthToken, String twilioFromNumber
+ String themeMode, bool useDynamicColor, bool biometricEnabled, String pinCode, int sosCountdownSeconds, bool persistentNotificationEnabled, bool showOnLockScreen, String sosSmsMessageTemplate, bool isSetupCompleted
 });
 
 
@@ -288,22 +280,18 @@ class __$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? languageCode = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,Object? twilioAccountSid = null,Object? twilioAuthToken = null,Object? twilioFromNumber = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? themeMode = null,Object? useDynamicColor = null,Object? biometricEnabled = null,Object? pinCode = null,Object? sosCountdownSeconds = null,Object? persistentNotificationEnabled = null,Object? showOnLockScreen = null,Object? sosSmsMessageTemplate = null,Object? isSetupCompleted = null,}) {
   return _then(_AppSettings(
 themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as String,useDynamicColor: null == useDynamicColor ? _self.useDynamicColor : useDynamicColor // ignore: cast_nullable_to_non_nullable
-as bool,languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
-as String,biometricEnabled: null == biometricEnabled ? _self.biometricEnabled : biometricEnabled // ignore: cast_nullable_to_non_nullable
+as bool,biometricEnabled: null == biometricEnabled ? _self.biometricEnabled : biometricEnabled // ignore: cast_nullable_to_non_nullable
 as bool,pinCode: null == pinCode ? _self.pinCode : pinCode // ignore: cast_nullable_to_non_nullable
 as String,sosCountdownSeconds: null == sosCountdownSeconds ? _self.sosCountdownSeconds : sosCountdownSeconds // ignore: cast_nullable_to_non_nullable
 as int,persistentNotificationEnabled: null == persistentNotificationEnabled ? _self.persistentNotificationEnabled : persistentNotificationEnabled // ignore: cast_nullable_to_non_nullable
 as bool,showOnLockScreen: null == showOnLockScreen ? _self.showOnLockScreen : showOnLockScreen // ignore: cast_nullable_to_non_nullable
 as bool,sosSmsMessageTemplate: null == sosSmsMessageTemplate ? _self.sosSmsMessageTemplate : sosSmsMessageTemplate // ignore: cast_nullable_to_non_nullable
 as String,isSetupCompleted: null == isSetupCompleted ? _self.isSetupCompleted : isSetupCompleted // ignore: cast_nullable_to_non_nullable
-as bool,twilioAccountSid: null == twilioAccountSid ? _self.twilioAccountSid : twilioAccountSid // ignore: cast_nullable_to_non_nullable
-as String,twilioAuthToken: null == twilioAuthToken ? _self.twilioAuthToken : twilioAuthToken // ignore: cast_nullable_to_non_nullable
-as String,twilioFromNumber: null == twilioFromNumber ? _self.twilioFromNumber : twilioFromNumber // ignore: cast_nullable_to_non_nullable
-as String,
+as bool,
   ));
 }
 

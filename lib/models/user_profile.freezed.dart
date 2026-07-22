@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserProfile {
 
- String get photoPath; String get fullName; String get nickname; DateTime? get dateOfBirth; String get gender; String get bloodGroup; double get height; double get weight; String get nationality; String get address; String get city; String get district; String get state; String get country; String get pinCode; String get occupation; String get language; String? get aadhaar; String get emergencyNotes;
+ String get photoPath; String get fullName; String get nickname; DateTime? get dateOfBirth; String get gender; String get bloodGroup; double get height; double get weight; String get nationality; String get address; String get city; String get district; String get state; String get country; String get pinCode; String get occupation; String? get aadhaar; String get emergencyNotes;
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $UserProfileCopyWith<UserProfile> get copyWith => _$UserProfileCopyWithImpl<User
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfile&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.nickname, nickname) || other.nickname == nickname)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.district, district) || other.district == district)&&(identical(other.state, state) || other.state == state)&&(identical(other.country, country) || other.country == country)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.language, language) || other.language == language)&&(identical(other.aadhaar, aadhaar) || other.aadhaar == aadhaar)&&(identical(other.emergencyNotes, emergencyNotes) || other.emergencyNotes == emergencyNotes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfile&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.nickname, nickname) || other.nickname == nickname)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.district, district) || other.district == district)&&(identical(other.state, state) || other.state == state)&&(identical(other.country, country) || other.country == country)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.aadhaar, aadhaar) || other.aadhaar == aadhaar)&&(identical(other.emergencyNotes, emergencyNotes) || other.emergencyNotes == emergencyNotes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,photoPath,fullName,nickname,dateOfBirth,gender,bloodGroup,height,weight,nationality,address,city,district,state,country,pinCode,occupation,language,aadhaar,emergencyNotes]);
+int get hashCode => Object.hash(runtimeType,photoPath,fullName,nickname,dateOfBirth,gender,bloodGroup,height,weight,nationality,address,city,district,state,country,pinCode,occupation,aadhaar,emergencyNotes);
 
 @override
 String toString() {
-  return 'UserProfile(photoPath: $photoPath, fullName: $fullName, nickname: $nickname, dateOfBirth: $dateOfBirth, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, nationality: $nationality, address: $address, city: $city, district: $district, state: $state, country: $country, pinCode: $pinCode, occupation: $occupation, language: $language, aadhaar: $aadhaar, emergencyNotes: $emergencyNotes)';
+  return 'UserProfile(photoPath: $photoPath, fullName: $fullName, nickname: $nickname, dateOfBirth: $dateOfBirth, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, nationality: $nationality, address: $address, city: $city, district: $district, state: $state, country: $country, pinCode: $pinCode, occupation: $occupation, aadhaar: $aadhaar, emergencyNotes: $emergencyNotes)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $UserProfileCopyWith<$Res>  {
   factory $UserProfileCopyWith(UserProfile value, $Res Function(UserProfile) _then) = _$UserProfileCopyWithImpl;
 @useResult
 $Res call({
- String photoPath, String fullName, String nickname, DateTime? dateOfBirth, String gender, String bloodGroup, double height, double weight, String nationality, String address, String city, String district, String state, String country, String pinCode, String occupation, String language, String? aadhaar, String emergencyNotes
+ String photoPath, String fullName, String nickname, DateTime? dateOfBirth, String gender, String bloodGroup, double height, double weight, String nationality, String address, String city, String district, String state, String country, String pinCode, String occupation, String? aadhaar, String emergencyNotes
 });
 
 
@@ -65,7 +65,7 @@ class _$UserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? photoPath = null,Object? fullName = null,Object? nickname = null,Object? dateOfBirth = freezed,Object? gender = null,Object? bloodGroup = null,Object? height = null,Object? weight = null,Object? nationality = null,Object? address = null,Object? city = null,Object? district = null,Object? state = null,Object? country = null,Object? pinCode = null,Object? occupation = null,Object? language = null,Object? aadhaar = freezed,Object? emergencyNotes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? photoPath = null,Object? fullName = null,Object? nickname = null,Object? dateOfBirth = freezed,Object? gender = null,Object? bloodGroup = null,Object? height = null,Object? weight = null,Object? nationality = null,Object? address = null,Object? city = null,Object? district = null,Object? state = null,Object? country = null,Object? pinCode = null,Object? occupation = null,Object? aadhaar = freezed,Object? emergencyNotes = null,}) {
   return _then(_self.copyWith(
 photoPath: null == photoPath ? _self.photoPath : photoPath // ignore: cast_nullable_to_non_nullable
 as String,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
@@ -83,7 +83,6 @@ as String,state: null == state ? _self.state : state // ignore: cast_nullable_to
 as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String,pinCode: null == pinCode ? _self.pinCode : pinCode // ignore: cast_nullable_to_non_nullable
 as String,occupation: null == occupation ? _self.occupation : occupation // ignore: cast_nullable_to_non_nullable
-as String,language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
 as String,aadhaar: freezed == aadhaar ? _self.aadhaar : aadhaar // ignore: cast_nullable_to_non_nullable
 as String?,emergencyNotes: null == emergencyNotes ? _self.emergencyNotes : emergencyNotes // ignore: cast_nullable_to_non_nullable
 as String,
@@ -171,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String photoPath,  String fullName,  String nickname,  DateTime? dateOfBirth,  String gender,  String bloodGroup,  double height,  double weight,  String nationality,  String address,  String city,  String district,  String state,  String country,  String pinCode,  String occupation,  String language,  String? aadhaar,  String emergencyNotes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String photoPath,  String fullName,  String nickname,  DateTime? dateOfBirth,  String gender,  String bloodGroup,  double height,  double weight,  String nationality,  String address,  String city,  String district,  String state,  String country,  String pinCode,  String occupation,  String? aadhaar,  String emergencyNotes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserProfile() when $default != null:
-return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,_that.gender,_that.bloodGroup,_that.height,_that.weight,_that.nationality,_that.address,_that.city,_that.district,_that.state,_that.country,_that.pinCode,_that.occupation,_that.language,_that.aadhaar,_that.emergencyNotes);case _:
+return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,_that.gender,_that.bloodGroup,_that.height,_that.weight,_that.nationality,_that.address,_that.city,_that.district,_that.state,_that.country,_that.pinCode,_that.occupation,_that.aadhaar,_that.emergencyNotes);case _:
   return orElse();
 
 }
@@ -192,10 +191,10 @@ return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String photoPath,  String fullName,  String nickname,  DateTime? dateOfBirth,  String gender,  String bloodGroup,  double height,  double weight,  String nationality,  String address,  String city,  String district,  String state,  String country,  String pinCode,  String occupation,  String language,  String? aadhaar,  String emergencyNotes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String photoPath,  String fullName,  String nickname,  DateTime? dateOfBirth,  String gender,  String bloodGroup,  double height,  double weight,  String nationality,  String address,  String city,  String district,  String state,  String country,  String pinCode,  String occupation,  String? aadhaar,  String emergencyNotes)  $default,) {final _that = this;
 switch (_that) {
 case _UserProfile():
-return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,_that.gender,_that.bloodGroup,_that.height,_that.weight,_that.nationality,_that.address,_that.city,_that.district,_that.state,_that.country,_that.pinCode,_that.occupation,_that.language,_that.aadhaar,_that.emergencyNotes);case _:
+return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,_that.gender,_that.bloodGroup,_that.height,_that.weight,_that.nationality,_that.address,_that.city,_that.district,_that.state,_that.country,_that.pinCode,_that.occupation,_that.aadhaar,_that.emergencyNotes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -212,10 +211,10 @@ return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String photoPath,  String fullName,  String nickname,  DateTime? dateOfBirth,  String gender,  String bloodGroup,  double height,  double weight,  String nationality,  String address,  String city,  String district,  String state,  String country,  String pinCode,  String occupation,  String language,  String? aadhaar,  String emergencyNotes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String photoPath,  String fullName,  String nickname,  DateTime? dateOfBirth,  String gender,  String bloodGroup,  double height,  double weight,  String nationality,  String address,  String city,  String district,  String state,  String country,  String pinCode,  String occupation,  String? aadhaar,  String emergencyNotes)?  $default,) {final _that = this;
 switch (_that) {
 case _UserProfile() when $default != null:
-return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,_that.gender,_that.bloodGroup,_that.height,_that.weight,_that.nationality,_that.address,_that.city,_that.district,_that.state,_that.country,_that.pinCode,_that.occupation,_that.language,_that.aadhaar,_that.emergencyNotes);case _:
+return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,_that.gender,_that.bloodGroup,_that.height,_that.weight,_that.nationality,_that.address,_that.city,_that.district,_that.state,_that.country,_that.pinCode,_that.occupation,_that.aadhaar,_that.emergencyNotes);case _:
   return null;
 
 }
@@ -227,7 +226,7 @@ return $default(_that.photoPath,_that.fullName,_that.nickname,_that.dateOfBirth,
 @JsonSerializable()
 
 class _UserProfile implements UserProfile {
-  const _UserProfile({this.photoPath = '', this.fullName = '', this.nickname = '', this.dateOfBirth, this.gender = '', this.bloodGroup = '', this.height = 0.0, this.weight = 0.0, this.nationality = '', this.address = '', this.city = '', this.district = '', this.state = '', this.country = '', this.pinCode = '', this.occupation = '', this.language = 'en', this.aadhaar, this.emergencyNotes = ''});
+  const _UserProfile({this.photoPath = '', this.fullName = '', this.nickname = '', this.dateOfBirth, this.gender = '', this.bloodGroup = '', this.height = 0.0, this.weight = 0.0, this.nationality = '', this.address = '', this.city = '', this.district = '', this.state = '', this.country = '', this.pinCode = '', this.occupation = '', this.aadhaar, this.emergencyNotes = ''});
   factory _UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
 
 @override@JsonKey() final  String photoPath;
@@ -246,7 +245,6 @@ class _UserProfile implements UserProfile {
 @override@JsonKey() final  String country;
 @override@JsonKey() final  String pinCode;
 @override@JsonKey() final  String occupation;
-@override@JsonKey() final  String language;
 @override final  String? aadhaar;
 @override@JsonKey() final  String emergencyNotes;
 
@@ -263,16 +261,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfile&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.nickname, nickname) || other.nickname == nickname)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.district, district) || other.district == district)&&(identical(other.state, state) || other.state == state)&&(identical(other.country, country) || other.country == country)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.language, language) || other.language == language)&&(identical(other.aadhaar, aadhaar) || other.aadhaar == aadhaar)&&(identical(other.emergencyNotes, emergencyNotes) || other.emergencyNotes == emergencyNotes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfile&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.nickname, nickname) || other.nickname == nickname)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.height, height) || other.height == height)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.district, district) || other.district == district)&&(identical(other.state, state) || other.state == state)&&(identical(other.country, country) || other.country == country)&&(identical(other.pinCode, pinCode) || other.pinCode == pinCode)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.aadhaar, aadhaar) || other.aadhaar == aadhaar)&&(identical(other.emergencyNotes, emergencyNotes) || other.emergencyNotes == emergencyNotes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,photoPath,fullName,nickname,dateOfBirth,gender,bloodGroup,height,weight,nationality,address,city,district,state,country,pinCode,occupation,language,aadhaar,emergencyNotes]);
+int get hashCode => Object.hash(runtimeType,photoPath,fullName,nickname,dateOfBirth,gender,bloodGroup,height,weight,nationality,address,city,district,state,country,pinCode,occupation,aadhaar,emergencyNotes);
 
 @override
 String toString() {
-  return 'UserProfile(photoPath: $photoPath, fullName: $fullName, nickname: $nickname, dateOfBirth: $dateOfBirth, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, nationality: $nationality, address: $address, city: $city, district: $district, state: $state, country: $country, pinCode: $pinCode, occupation: $occupation, language: $language, aadhaar: $aadhaar, emergencyNotes: $emergencyNotes)';
+  return 'UserProfile(photoPath: $photoPath, fullName: $fullName, nickname: $nickname, dateOfBirth: $dateOfBirth, gender: $gender, bloodGroup: $bloodGroup, height: $height, weight: $weight, nationality: $nationality, address: $address, city: $city, district: $district, state: $state, country: $country, pinCode: $pinCode, occupation: $occupation, aadhaar: $aadhaar, emergencyNotes: $emergencyNotes)';
 }
 
 
@@ -283,7 +281,7 @@ abstract mixin class _$UserProfileCopyWith<$Res> implements $UserProfileCopyWith
   factory _$UserProfileCopyWith(_UserProfile value, $Res Function(_UserProfile) _then) = __$UserProfileCopyWithImpl;
 @override @useResult
 $Res call({
- String photoPath, String fullName, String nickname, DateTime? dateOfBirth, String gender, String bloodGroup, double height, double weight, String nationality, String address, String city, String district, String state, String country, String pinCode, String occupation, String language, String? aadhaar, String emergencyNotes
+ String photoPath, String fullName, String nickname, DateTime? dateOfBirth, String gender, String bloodGroup, double height, double weight, String nationality, String address, String city, String district, String state, String country, String pinCode, String occupation, String? aadhaar, String emergencyNotes
 });
 
 
@@ -300,7 +298,7 @@ class __$UserProfileCopyWithImpl<$Res>
 
 /// Create a copy of UserProfile
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? photoPath = null,Object? fullName = null,Object? nickname = null,Object? dateOfBirth = freezed,Object? gender = null,Object? bloodGroup = null,Object? height = null,Object? weight = null,Object? nationality = null,Object? address = null,Object? city = null,Object? district = null,Object? state = null,Object? country = null,Object? pinCode = null,Object? occupation = null,Object? language = null,Object? aadhaar = freezed,Object? emergencyNotes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? photoPath = null,Object? fullName = null,Object? nickname = null,Object? dateOfBirth = freezed,Object? gender = null,Object? bloodGroup = null,Object? height = null,Object? weight = null,Object? nationality = null,Object? address = null,Object? city = null,Object? district = null,Object? state = null,Object? country = null,Object? pinCode = null,Object? occupation = null,Object? aadhaar = freezed,Object? emergencyNotes = null,}) {
   return _then(_UserProfile(
 photoPath: null == photoPath ? _self.photoPath : photoPath // ignore: cast_nullable_to_non_nullable
 as String,fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
@@ -318,7 +316,6 @@ as String,state: null == state ? _self.state : state // ignore: cast_nullable_to
 as String,country: null == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
 as String,pinCode: null == pinCode ? _self.pinCode : pinCode // ignore: cast_nullable_to_non_nullable
 as String,occupation: null == occupation ? _self.occupation : occupation // ignore: cast_nullable_to_non_nullable
-as String,language: null == language ? _self.language : language // ignore: cast_nullable_to_non_nullable
 as String,aadhaar: freezed == aadhaar ? _self.aadhaar : aadhaar // ignore: cast_nullable_to_non_nullable
 as String?,emergencyNotes: null == emergencyNotes ? _self.emergencyNotes : emergencyNotes // ignore: cast_nullable_to_non_nullable
 as String,

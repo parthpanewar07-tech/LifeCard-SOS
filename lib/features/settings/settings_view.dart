@@ -5,6 +5,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/extensions/context_extensions.dart';
 import '../../models/app_settings.dart';
 import '../../shared/providers.dart';
+import 'package:home_widget/home_widget.dart';
 
 class SettingsView extends ConsumerStatefulWidget {
   const SettingsView({super.key});
@@ -95,6 +96,98 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   }
 
 
+  Future<void> _pinSosWidget() async {
+    try {
+      final isSupported = await HomeWidget.isRequestPinWidgetSupported();
+      if (isSupported == true) {
+        await HomeWidget.requestPinWidget(
+          qualifiedAndroidName: 'com.example.life_card_and_sos.SosWidgetProvider',
+        );
+      } else {
+        if (mounted) {
+          context.showSnackBar('Pinning widgets is not supported on this device/launcher.');
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        context.showSnackBar('Could not pin widget: $e');
+      }
+    }
+  }
+
+  void _showWidgetSettingsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.dashboard_rounded, color: AppColors.phoneOrange),
+            SizedBox(width: 8),
+            Text('Home Screen Widgets'),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Trigger emergency SOS alerts or view your Medical Card directly from your mobile home screen using widgets or shortcuts.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                '1. Home Screen App Widget',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.phoneOrange),
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                '• Go to your mobile Home Screen.\n'
+                '• Long-press on any empty space.\n'
+                '• Tap "Widgets" / "Add Widget".\n'
+                '• Find "LifeCard SOS" and drag the circular "SOS" widget to your screen.',
+                style: TextStyle(fontSize: 13, height: 1.4),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  _pinSosWidget();
+                },
+                icon: const Icon(Icons.add_to_home_screen_rounded),
+                label: const Text('Pin SOS Widget Automatically'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.phoneOrange,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size.fromHeight(40),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                '2. Launcher Shortcuts',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.phoneOrange),
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                '• Long-press the LifeCard SOS app icon.\n'
+                '• You will see quick actions: "Trigger SOS" and "Medical Card".\n'
+                '• Drag either option onto your home screen to create a dedicated shortcut icon.',
+                style: TextStyle(fontSize: 13, height: 1.4),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Got it', style: TextStyle(color: AppColors.phoneOrange, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final settingsAsync = ref.watch(settingsProvider);
@@ -144,7 +237,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
               color: AppColors.phoneOrange,
               title: 'Widget Settings',
               subtitle: 'Home screen SOS triggers',
-              onTap: () {},
+              onTap: _showWidgetSettingsDialog,
             ),
 
 
@@ -161,18 +254,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       ? 'Light Mode'
                       : (settings.themeMode == 'dark' ? 'Dark Mode' : 'AMOLED Pure Black')),
               onTap: () => _showThemeDialog(settings),
-            ),
-            _buildSettingTile(
-              icon: Icons.language_rounded,
-              color: AppColors.locationBlue,
-              title: 'Language',
-              subtitle: settings.languageCode == 'en' ? 'English (US)' : 'Hindi',
-              onTap: () {
-                final nextLang = settings.languageCode == 'en' ? 'hi' : 'en';
-                ref.read(settingsProvider.notifier).updateSettings(
-                      settings.copyWith(languageCode: nextLang),
-                    );
-              },
             ),
             _buildSettingTileWithSwitch(
               icon: Icons.notifications_active,

@@ -16,6 +16,8 @@ final profileRepositoryProvider = Provider((ref) => ProfileRepository());
 final medicalRepositoryProvider = Provider((ref) => MedicalRepository());
 final contactRepositoryProvider = Provider((ref) => ContactRepository());
 final helplineRepositoryProvider = Provider((ref) => HelplineRepository());
+// Initial navigation location (can be overridden on widget launch)
+final initialLocationProvider = Provider<String>((ref) => '/');
 
 // Settings Notifier
 class SettingsNotifier extends AsyncNotifier<AppSettings> {

@@ -8,7 +8,6 @@ abstract class AppSettings with _$AppSettings {
   const factory AppSettings({
     @Default('system') String themeMode,
     @Default(true) bool useDynamicColor,
-    @Default('en') String languageCode,
     @Default(false) bool biometricEnabled,
     @Default('') String pinCode,
     @Default(5) int sosCountdownSeconds,

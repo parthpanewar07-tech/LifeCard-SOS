@@ -38,7 +38,6 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
   DateTime? _dob;
   String _gender = 'Male';
   String _bloodGroup = 'Unknown';
-  String _language = 'en';
   String _photoPath = '';
 
   @override
@@ -69,7 +68,6 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
     } else {
       _bloodGroup = 'Unknown';
     }
-    if (profile.language.isNotEmpty) _language = profile.language;
   }
 
   @override
@@ -135,7 +133,6 @@ class _ProfileEditScreenState extends ConsumerState<ProfileEditScreen> {
       country: _countryController.text.trim(),
       pinCode: _pinController.text.trim(),
       occupation: _occupationController.text.trim(),
-      language: _language,
       aadhaar: _aadhaarController.text.trim().isNotEmpty ? _aadhaarController.text.trim() : null,
       emergencyNotes: _notesController.text.trim(),
     );
