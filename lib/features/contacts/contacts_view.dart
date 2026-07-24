@@ -33,14 +33,6 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
     }
   }
 
-  Future<void> _openWhatsApp(String number) async {
-    final cleanNumber = number.replaceAll(RegExp(r'\D'), '');
-    final uri = Uri.parse('https://wa.me/$cleanNumber');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final contactsAsync = ref.watch(contactsProvider);
@@ -54,35 +46,16 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Custom App Header
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Row(
-                  children: [
-                    SizedBox(width: 16),
-                    Text(
-                      'Contacts',
-                      style: TextStyle(
-                        color: AppColors.primaryRed,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                      ),
-                    ),
-                  ],
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 4.0),
+              child: Text(
+                'Contacts',
+                style: TextStyle(
+                  color: AppColors.primaryRed,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.search, color: Colors.grey),
-                      onPressed: () {},
-                    ),
-                    const CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.person, color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
             const SizedBox(height: 16),
 
@@ -293,80 +266,91 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
     return Card(
       key: ValueKey(contact.id),
       margin: const EdgeInsets.only(bottom: 8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
-          children: [
-            // Priority Index badge
-            CircleAvatar(
-              radius: 12,
-              backgroundColor: AppColors.primaryRed.withValues(alpha: 0.1),
-              child: Text(
-                '${idx + 1}',
-                style: const TextStyle(
-                  color: AppColors.primaryRed,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () => context.push('/contacts/edit/${contact.id}'),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              // Priority Index badge
+              CircleAvatar(
+                radius: 12,
+                backgroundColor: AppColors.primaryRed.withValues(alpha: 0.1),
+                child: Text(
+                  '${idx + 1}',
+                  style: const TextStyle(
+                    color: AppColors.primaryRed,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(width: 12),
-            // Details
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    contact.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: context.colorScheme.onSurface,
+              const SizedBox(width: 12),
+              // Details
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      contact.name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: context.colorScheme.onSurface,
+                      ),
                     ),
+                    Text(
+                      '${contact.relationship} • ${contact.primaryPhone}',
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+              // Actions
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.phone_rounded,
+                      color: AppColors.cameraGreen,
+                      size: 20,
+                    ),
+                    onPressed: () => _makeCall(contact.primaryPhone),
                   ),
-                  Text(
-                    '${contact.relationship} • ${contact.primaryPhone}',
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.sms_rounded,
+                      color: AppColors.locationBlue,
+                      size: 20,
+                    ),
+                    onPressed: () => _sendSms(contact.primaryPhone),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      color: AppColors.phoneOrange,
+                      size: 20,
+                    ),
+                    onPressed: () => context.push('/contacts/edit/${contact.id}'),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.grey,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      ref
+                          .read(contactsProvider.notifier)
+                          .deleteContact(contact.id);
+                    },
                   ),
                 ],
               ),
-            ),
-            // Actions
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.phone_rounded,
-                    color: AppColors.cameraGreen,
-                    size: 20,
-                  ),
-                  onPressed: () => _makeCall(contact.primaryPhone),
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.sms_rounded,
-                    color: AppColors.locationBlue,
-                    size: 20,
-                  ),
-                  onPressed: () => _sendSms(contact.primaryPhone),
-                ),
-
-                IconButton(
-                  icon: const Icon(
-                    Icons.delete_outline,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  onPressed: () {
-                    ref
-                        .read(contactsProvider.notifier)
-                        .deleteContact(contact.id);
-                  },
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
