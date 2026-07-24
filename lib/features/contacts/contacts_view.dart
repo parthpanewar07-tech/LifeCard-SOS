@@ -59,7 +59,6 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
               children: [
                 const Row(
                   children: [
-                    
                     SizedBox(width: 16),
                     Text(
                       'Contacts',
@@ -82,7 +81,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                       child: Icon(Icons.person, color: Colors.grey),
                     ),
                   ],
-                )
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -97,7 +96,7 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                     color: Color(0x05000000),
                     blurRadius: 10,
                     offset: Offset(0, 4),
-                  )
+                  ),
                 ],
               ),
               child: TextField(
@@ -133,7 +132,9 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                         onTap: () => setState(() => _activeSegment = 0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: _activeSegment == 0 ? context.colorScheme.surface : Colors.transparent,
+                            color: _activeSegment == 0
+                                ? context.colorScheme.surface
+                                : Colors.transparent,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
@@ -142,7 +143,9 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: _activeSegment == 0 ? AppColors.primaryRed : Colors.grey,
+                                color: _activeSegment == 0
+                                    ? AppColors.primaryRed
+                                    : Colors.grey,
                               ),
                             ),
                           ),
@@ -154,7 +157,9 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                         onTap: () => setState(() => _activeSegment = 1),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: _activeSegment == 1 ? context.colorScheme.surface : Colors.transparent,
+                            color: _activeSegment == 1
+                                ? context.colorScheme.surface
+                                : Colors.transparent,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
@@ -163,7 +168,9 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: _activeSegment == 1 ? AppColors.primaryRed : Colors.grey,
+                                color: _activeSegment == 1
+                                    ? AppColors.primaryRed
+                                    : Colors.grey,
                               ),
                             ),
                           ),
@@ -181,12 +188,20 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
               child: _activeSegment == 0
                   ? contactsAsync.when(
                       data: (contacts) {
-                        final filtered = contacts.where((c) =>
-                            c.name.toLowerCase().contains(_searchQuery) ||
-                            c.relationship.toLowerCase().contains(_searchQuery)).toList();
+                        final filtered = contacts
+                            .where(
+                              (c) =>
+                                  c.name.toLowerCase().contains(_searchQuery) ||
+                                  c.relationship.toLowerCase().contains(
+                                    _searchQuery,
+                                  ),
+                            )
+                            .toList();
 
                         if (filtered.isEmpty) {
-                          return const Center(child: Text('No contacts found. Tap + to add.'));
+                          return const Center(
+                            child: Text('No contacts found. Tap + to add.'),
+                          );
                         }
 
                         return Column(
@@ -196,17 +211,23 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                               padding: EdgeInsets.only(left: 4.0, bottom: 8.0),
                               child: Text(
                                 'Family & Physicians (Drag to set priority)',
-                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.grey),
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                             Expanded(
                               child: ReorderableListView.builder(
                                 itemCount: filtered.length,
-                                  onReorderItem: (oldIdx, newIdx) {
-                                    final item = filtered.removeAt(oldIdx);
-                                    filtered.insert(newIdx, item);
-                                    ref.read(contactsProvider.notifier).reorderContacts(filtered);
-                                  },
+                                onReorderItem: (oldIdx, newIdx) {
+                                  final item = filtered.removeAt(oldIdx);
+                                  filtered.insert(newIdx, item);
+                                  ref
+                                      .read(contactsProvider.notifier)
+                                      .reorderContacts(filtered);
+                                },
                                 itemBuilder: (context, idx) {
                                   final contact = filtered[idx];
                                   return _buildContactTile(contact, idx);
@@ -216,30 +237,43 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                           ],
                         );
                       },
-                      loading: () => const Center(child: CircularProgressIndicator()),
-                      error: (err, stack) => const Center(child: Text('Error loading contacts')),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      error: (err, stack) =>
+                          const Center(child: Text('Error loading contacts')),
                     )
                   : helplinesAsync.when(
                       data: (helplines) {
-                        final filtered = helplines.where((h) =>
-                            h.name.toLowerCase().contains(_searchQuery) ||
-                            h.category.toLowerCase().contains(_searchQuery)).toList();
+                        final filtered = helplines
+                            .where(
+                              (h) =>
+                                  h.name.toLowerCase().contains(_searchQuery) ||
+                                  h.category.toLowerCase().contains(
+                                    _searchQuery,
+                                  ),
+                            )
+                            .toList();
 
                         if (filtered.isEmpty) {
-                          return const Center(child: Text('No helplines found.'));
+                          return const Center(
+                            child: Text('No helplines found.'),
+                          );
                         }
 
                         return ListView.separated(
                           itemCount: filtered.length,
-                           separatorBuilder: (context, index) => const Divider(height: 1),
+                          separatorBuilder: (context, index) =>
+                              const Divider(height: 1),
                           itemBuilder: (context, idx) {
                             final helpline = filtered[idx];
                             return _buildHelplineTile(helpline);
                           },
                         );
                       },
-                      loading: () => const Center(child: CircularProgressIndicator()),
-                      error: (err, stack) => const Center(child: Text('Error loading helplines')),
+                      loading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      error: (err, stack) =>
+                          const Center(child: Text('Error loading helplines')),
                     ),
             ),
           ],
@@ -269,7 +303,11 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
               backgroundColor: AppColors.primaryRed.withValues(alpha: 0.1),
               child: Text(
                 '${idx + 1}',
-                style: const TextStyle(color: AppColors.primaryRed, fontSize: 12, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: AppColors.primaryRed,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -280,7 +318,11 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
                 children: [
                   Text(
                     contact.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: context.colorScheme.onSurface),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: context.colorScheme.onSurface,
+                    ),
                   ),
                   Text(
                     '${contact.relationship} • ${contact.primaryPhone}',
@@ -294,25 +336,36 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.phone_rounded, color: AppColors.cameraGreen, size: 20),
+                  icon: const Icon(
+                    Icons.phone_rounded,
+                    color: AppColors.cameraGreen,
+                    size: 20,
+                  ),
                   onPressed: () => _makeCall(contact.primaryPhone),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.sms_rounded, color: AppColors.locationBlue, size: 20),
+                  icon: const Icon(
+                    Icons.sms_rounded,
+                    color: AppColors.locationBlue,
+                    size: 20,
+                  ),
                   onPressed: () => _sendSms(contact.primaryPhone),
                 ),
+
                 IconButton(
-                  icon: const Icon(Icons.chat_bubble_rounded, color: AppColors.phoneOrange, size: 18),
-                  onPressed: () => _openWhatsApp(contact.primaryPhone),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.delete_outline, color: Colors.grey, size: 20),
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: Colors.grey,
+                    size: 20,
+                  ),
                   onPressed: () {
-                    ref.read(contactsProvider.notifier).deleteContact(contact.id);
+                    ref
+                        .read(contactsProvider.notifier)
+                        .deleteContact(contact.id);
                   },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -321,10 +374,17 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
 
   Widget _buildHelplineTile(Helpline helpline) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 4.0,
+        vertical: 4.0,
+      ),
       title: Text(
         helpline.name,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: context.colorScheme.onSurface),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: context.colorScheme.onSurface,
+        ),
       ),
       subtitle: Text(
         '${helpline.category} • ${helpline.number}',
@@ -334,11 +394,19 @@ class _ContactsViewState extends ConsumerState<ContactsView> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: const Icon(Icons.phone_rounded, color: AppColors.cameraGreen, size: 22),
+            icon: const Icon(
+              Icons.phone_rounded,
+              color: AppColors.cameraGreen,
+              size: 22,
+            ),
             onPressed: () => _makeCall(helpline.number),
           ),
           IconButton(
-            icon: const Icon(Icons.sms_rounded, color: AppColors.locationBlue, size: 22),
+            icon: const Icon(
+              Icons.sms_rounded,
+              color: AppColors.locationBlue,
+              size: 22,
+            ),
             onPressed: () => _sendSms(helpline.number),
           ),
         ],
